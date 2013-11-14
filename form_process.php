@@ -14,7 +14,7 @@ $finder = $_POST['finder'];
 $item_status = $_POST['item_status'];
 
 //insert data into table
-$sql = "INSERT INTO stuff (description, room, owner, finder, item_status) VALUES ('$decription', '$room', '$owner', '$finder', '$item_status')";
+$sql = "INSERT INTO stuff (description, room, owner, finder, item_status) VALUES ('$description', '$room', '$owner', '$finder', '$item_status')";
 
 //error check
 if (!mysql_query($sql)) 
