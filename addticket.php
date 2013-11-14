@@ -11,7 +11,7 @@
 	<div>
 	<p><a href="limbo.php"> Home</a>  > <a href="admin.php"> Admin Login</a> > <a href="admin-1.php"> Admin Options</a> > Add ticket</p>
 	</div>
-	<h1>Add Ticket</h1>
+	<h1>Limbo - Add Ticket</h1>
 	<body>
 	
 	<?php
