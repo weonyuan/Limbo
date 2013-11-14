@@ -62,13 +62,16 @@
         echo '</TR>';
 
         # For each row result, generate a table row
-        while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
-        {
+        while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) ) {
+          $alink = '<A HREF=lost.php?id=' . $row['id'] . '>' .
+                 $row['id'] . '</A>' ;
+          $alinkDesc = '<A HREF=lost.php?id=' . $row['id'] . '>' .
+                   $row['description'] . '</A>' ;
           echo '<TR>' ;
-          echo '<TD>' . $row['id'] . '</TD>' ;
-          echo '<TD>' . $row['update_date'] . '</TD>' ;
-          echo '<TD>' . $row['item_status'] . '</TD>' ;
-          echo '<TD><A href="quicklink1.php">' . $row['description'] . '</A></TD>' ;
+          echo '<TD ALIGN=right>' . $alink . '</TD>' ;
+          echo '<TD ALIGN=left>' . $row['update_date'] . '</TD>' ;
+          echo '<TD ALIGN=left>' . $row['item_status'] . '</TD>' ;
+          echo '<TD ALIGN=left>' . $alinkDesc . '</TD>' ;
           echo '</TR>' ;
         }
 
