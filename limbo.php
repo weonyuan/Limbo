@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-<!DOCTYPE HTML>
 <html>
   <head>
     <title>Limbo - Home</title>
@@ -29,9 +28,15 @@
     <div>
       Reported in last
       <select name="lastReported">
-        <option value="7 days">7 days</option>
+        <option value="7">week</option>
+        <option value="30">month</option>
+        <option value="90">3 months</option>
+        <option value="183">6 months</option>
+        <option value="365">year</option>
       </select>
     </div>
+    
+    <br>
     
     <?php
       # Connect to MySQL server and the database
