@@ -75,10 +75,10 @@
       # Close the connection
       mysqli_close( $dbc ) ;
     ?>
-	<button type="button">UPDATE</button>
+	<input type="submit" name="submit" id="submit" value="Update" />
 	
 	<div>
-      <a href="#">Add Ticket</a>
+      <a href="addticket.php">Add Ticket</a>
       <a href="#">Add New User</a>
       <a href="#">Change Password</a>
     </div>
