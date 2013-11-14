@@ -13,6 +13,12 @@
 	</div>
 	<h1>Add Ticket</h1>
 	<body>
+	
+	<?php
+	//connect to limbo_db
+	require( '/includes/connect_limbo_db.php' ) ;
+	?>
+	
 	<form action="form_process.php" method="post" name="add_ticket_form">
 		<p>
 		Description:
