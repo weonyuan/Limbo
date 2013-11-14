@@ -3,6 +3,9 @@
 //connect to limbo_db
 require( '/includes/connect_limbo_db.php' ) ;
 
+//select database
+mysqli_select_db ($dbc, 'limbo_db');
+
 //create variables for form
 $description = $_POST['description'];
 $room = $_POST['room'];
