@@ -1,30 +1,18 @@
-<!DOCTYPE HTML>
-<!DOCTYPE HTML>
 <html>
   <head>
-    <title>Limbo - Home</title>
-    
-    <style>
-      td, th {
-        padding: 5px;
-      }
-    </style>
+    <title>Quick Links</title>
   </head>
   
   <body>
     <div>
-      <a href="lost.php">Lost something</a>&nbsp;
-      <a href="found.php">Found something</a>&nbsp;
+      <a href="lost.php">Lost something</a>
+      <a href="found.php">Found something</a>
       <a href="admin.php">Admins</a>
     </div>
     
-    <p>Home</a></p>
+    <p><a href="limbo.php"> Home</a>  >  Quick Link</p>
     
-    <h1>Welcome to Limbo!</h1>
-    <div>
-         If you lost or found something, you're in luck: 
-         this is the place to report it.
-    </div>
+    <h1>Quick Links</h1>
     
     <div>
       Reported in last
@@ -38,7 +26,7 @@
       require( '/includes/connect_limbo_db.php' ) ;
 
       # Create a query to get the name and price sorted by price
-      $query = 'SELECT id, update_date, item_status, description FROM stuff  ORDER BY update_date DESC' ;
+      $query = 'SELECT id,item_status, update_date, location_id FROM stuff ORDER BY update_date DESC' ;
 
       # Execute the query
       $results = mysqli_query( $dbc , $query ) ;
@@ -51,9 +39,9 @@
         echo '<TABLE border=\"2px solid black\">';
         echo '<TR>';
         echo '<TH>ID</TH>';
-        echo '<TH>Date/Time</TH>';
         echo '<TH>Item Status</TH>';
-        echo '<TH>Stuff</TH>';
+        echo '<TH>Update Date</TH>';
+        echo '<TH>Location ID</TH>';
         echo '</TR>';
 
         # For each row result, generate a table row
@@ -61,9 +49,9 @@
         {
           echo '<TR>' ;
           echo '<TD>' . $row['id'] . '</TD>' ;
-          echo '<TD>' . $row['update_date'] . '</TD>' ;
           echo '<TD>' . $row['item_status'] . '</TD>' ;
-          echo '<TD><A href="quicklink1.php">' . $row['description'] . '</A></TD>' ;
+          echo '<TD>' . $row['update_date'] . '</TD>' ;
+          echo '<TD>' . $row['location_id'] . '</TD>' ;
           echo '</TR>' ;
         }
 
@@ -82,5 +70,6 @@
       # Close the connection
       mysqli_close( $dbc ) ;
     ?>
+	<button type="button">Click Here for Full Description</button>
   </body>
 </html>
