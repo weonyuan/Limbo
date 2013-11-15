@@ -17,14 +17,14 @@
       <a href="admin.php">Admins</a>
     </div>
     
-    <p><a href="limbo.php"> Home</a> > Lost Something</p>
+    <p><a href="limbo.php">Home</a> > Lost Something</p>
     
     <h1>Lost Something</h1>
     <div>If you have lost something, search for it here!</div>
     
     <div>
-      <form action="lost.php" method="POST">
-        <input type="search" name="item"> <input type="submit">
+      <form action="lost.php">
+        <input type="search" name="item">
         Reported in last
         <select name="lastReported">
           <option value="7">week</option>
@@ -33,27 +33,28 @@
           <option value="183">6 months</option>
           <option value="365">year</option>
         </select>
+        <input type="submit" name="lost">
       </form>
     </div>
     
-    <br>
-    
-     <?php
+    <?php
       # Connect to MySQL server and the database
       require( 'includes/connect_limbo_db.php' ) ;
 
       # Connect to MySQL server and the database
-      require( 'includes/lost_tools.php' );
+      require( 'includes/helpers.php' );
       
-      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $item = $_POST['item'];
-        $reportedDate = $_POST['lastReported'];
-        //load('lost.php', $item);
-        show_link_records($dbc, $item, $reportedDate);
+      if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        if (isset($_GET['item'])) {
+          $item = $_GET['item'];
+          $reportedDate = $_GET['lastReported'];
+          $status = 'lost';
+          show_link_records($dbc, $item, $reportedDate, $status);
+        }
       }
 
       # Close the connection
       mysqli_close( $dbc );
-      ?>
+    ?>
   </body>
 </html>
