@@ -43,7 +43,6 @@
         echo '<TH>Item Status</TH>';
         echo '<TH>Stuff</TH>';
 		echo '<TH>Ticket Status</TH>';
-		echo '<TH>Delete</TH>';
         echo '</TR>';
 
         # For each row result, generate a table row
@@ -54,9 +53,7 @@
           echo '<TD>' . $row['update_date'] . '</TD>' ;
           echo '<TD>' . $row['item_status'] . '</TD>' ;
           echo '<TD><A href="#">' . $row['description'] . '</A></TD>' ;
-		  echo '<TD> <select name="lastReported"> <option value="open">open</option> 
-		  <option value="closed">closed</option> <option value="on hold">on hold</option>' . $row['ticket_status'] . '</select></TD>' ;
-		  echo '<TD><A href="#">Update</A> <A href="#">Delete</A></TD>';
+		  echo '<TD>' . $row['ticket_status'] . '</select></TD>' ;
           echo '</TR>' ;
         }
 
@@ -75,13 +72,15 @@
       # Close the connection
       mysqli_close( $dbc ) ;
     ?>
-	<input type="submit" name="submit" id="submit" value="Update" />
 	
+	<p>
 	<div>
       <a href="addticket.php">Add Ticket</a>
+	  <a href="form_update.php">Update Ticket</a>
+	  <a href="delete_ticket.php">Delete Ticket</a>
       <a href="#">Add New User</a>
       <a href="#">Change Password</a>
     </div>
-    
+    </p>
   </body>
 </html>
