@@ -10,7 +10,7 @@
       <a href="admin.php">Admins</a>
     </div>
 	
-	<p><a href="limbo.php"> Home</a> > <a href="admin.php"> Admin Login</a> > <a href="Admin-1.php"> Admin Options</a> > <a href="admin.php"> Add Ticket</a> > Ticket Added </p>
+	<p><a href="limbo.php"> Home</a> > <a href="admin.php"> Admin Login</a> > <a href="Admin-1.php"> Admin Options</a> > <a href="addticket.php"> Add Ticket</a> > Ticket Added </p>
 	
 		<?php
 		#connect to limbo
