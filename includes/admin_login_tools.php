@@ -8,7 +8,7 @@ JE	07-Nov-13   Modified File for Presidents table.
 -->
 <?php
 # Includes these helper functions
-require( 'includes/helpers.php' ) ;
+require( 'includes/admin_helpers.php' ) ;
 
 # Loads a specified or default URL.
 function load( $page = 'limbo.php', $pid = -1 )
