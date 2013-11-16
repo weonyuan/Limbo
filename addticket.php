@@ -31,7 +31,7 @@
 		</p>
 		
 		<p>
-		Room:
+		Location:
 		<select name="location">
 			<option value="1">Byrne House</option>
 			<option value="2">James A. Cannavino Library</option>
@@ -57,7 +57,7 @@
 			<option value="22">St. Peter's</option>
 			<option value="23">Sheahan Hall</option>
 			<option value="24">Steel Plant Studios and Gallery</option>
-			<option value="25">Student</option>
+			<option value="25">Student Center</option>
 			<option value="26">Foy Townhouses</option>
 			<option value="27">Lower West Cedar Townhouses</option>
 			<option value="28">Upper West Cedar Townhouses</option>
