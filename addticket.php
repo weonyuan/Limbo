@@ -31,6 +31,7 @@
 		</p>
 		
 		<p>
+<<<<<<< HEAD
 		Location:
 		<select name="location">
 			<option value="1">Byrne House</option>
@@ -67,6 +68,8 @@
 		</select>
 		
 		<p>
+=======
+>>>>>>> 4fb8f96ec598a9031c79616b1e5149950d1ba116
 		Owner (If Applies):
 		<input name="owner" type="text" />
 		</p>

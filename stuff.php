@@ -8,7 +8,7 @@
       # Connect to MySQL server and the database
       require( 'includes/helpers.php' );
       
-      echo '<title>Limbo - ' . $_GET['description'] . '</title>';
+      show_title($dbc, $_GET['id']);
     ?>
     <style>
       td, th {
@@ -25,40 +25,17 @@
     </div>
     
     <?php
-      show_record($dbc, 1);
+      if ($_SERVER[ 'REQUEST_METHOD' ] == 'GET') {
+        if (isset($_GET['full'], $_GET['id'])) {
+          show_full_record($dbc, $_GET['id']) ;
+        }
+        else if (isset($_GET['id'])) {
+          show_record($dbc, $_GET['id']) ;
+        }
+      }
+      # Close the connection
+      mysqli_close( $dbc );
     ?>
-    <!--<p>
-      <a href="limbo.php">Limbo</a> > 
-      <a href="found.php">Found something</a> > 
-      Red Marist Crew backpack
-    </p>
-    
-    <h1>Red Marist Crew backpack</h1>
-    
-    <table border="2px solid black">
-      <tr>
-        <th>ID</th>
-        <td>1</td>
-      </tr>
-      <tr>
-        <th>Current Status</th>
-        <td>Lost</td>
-      </tr>
-      <tr>
-        <th>Lost Date/Time</th>
-        <td>04 Dec 2012, 12:43:32 EST</td>
-      </tr>
-      <tr>
-        <th>Update Date/Time</th>
-        <td>12 Dec 2012, 15:24:16 EST</td>
-      </tr>
-      <tr>
-        <th>Last Known Location</th>
-        <td>Marist Boathouse</td>
-      </tr>
-    </table>
-    -->
-    <p><a href="#">Click here for full description</a></p>
     
     <table border="1px solid black" style="width: 500px;">
       <tr>

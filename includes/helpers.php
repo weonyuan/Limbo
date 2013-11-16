@@ -64,9 +64,9 @@ function show_link_records($dbc, $item, $reportedDate, $status) {
 
       # For each row result, generate a table row
       while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) ) {
-        $alink = '<A HREF=lost.php?id=' . $row['id'] . '>' .
+        $alink = '<A HREF=stuff.php?id=' . $row['id'] . '>' .
                  $row['id'] . '</A>' ;
-        $alinkDesc = '<A HREF=lost.php?id=' . $row['id'] . '>' .
+        $alinkDesc = '<A HREF=stuff.php?id=' . $row['id'] . '>' .
                  $row['description'] . '</A>' ;
         echo '<TR>' ;
         echo '<TD ALIGN=right>' . $alink . '</TD>' ;
@@ -86,6 +86,150 @@ function show_link_records($dbc, $item, $reportedDate, $status) {
   else {
     echo '<P>No results found.</P>' ;
   }
+}
+
+# Shows the selected record in quick link.
+function show_record($dbc, $id) {
+  # Create a query to get the id, date, status, and description by date descending.
+	$query = 'SELECT id, update_date, item_status, description FROM stuff ' .
+           'WHERE id=' . $id;
+
+	# Execute the query
+	$results = mysqli_query( $dbc , $query ) ;
+	check_results($results) ;
+  
+  # This will count the number of results in the table.
+  $rowCount = mysqli_num_rows($results);
+
+  # Show results
+  if( $results ) {
+    # But...wait until we know the query succeeded before
+    # rendering the table start.
+    if ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) ) {
+      echo '<P>';
+      echo '<A HREF=limbo.php>Limbo</A> > ';
+      echo '<A HREF=lost.php>Lost something</A> > ';
+      echo $row['description'];
+      
+      echo '<H1>' . $row['description'] . '</H1>';
+      echo '<TABLE border=\"2px solid black\">';
+      
+      echo '<TR>';
+      echo '<TH ALIGN=center>ID</TH>';
+      echo '<TD ALIGN=left>' . $row['id'] . '</TD>';
+      echo '</TR>';
+      
+      echo '<TR>';
+      echo '<TH ALIGN=center>Update Date/Time</TH>';
+      echo '<TD ALIGN=left>' . $row['update_date'] . '</TD>';
+      echo '</TR>';
+      
+      echo '<TR>';
+      echo '<TH ALIGN=center>Item Status</TH>';
+      echo '<TD ALIGN=left>' . $row['item_status'] . '</TD>';
+      echo '</TR>';
+      
+      echo '<TR>';
+      echo '<TH ALIGN=center>Description</TH>';
+      echo '<TD ALIGN=left>' . $row['description'] . '</TD>';
+      echo '</TR>';
+    }
+
+    # End the table
+    echo '</TABLE>';
+    
+    echo '<P><A HREF=stuff.php?id=' . $row['id'] . '&full=true>' .
+         'Click here for full description</A></P>';
+    
+    # Free up the results in memory
+    mysqli_free_result( $results ) ;
+  }
+}
+
+# Shows the selected record in complete info.
+function show_full_record($dbc, $id) {
+  # Create a query to get the id, date, status, and description by date descending.
+	$query = 'SELECT s.id, s.create_date, s.update_date, s.item_status, l.name, s.description ' .
+           'FROM stuff s, locations l ' .
+           'WHERE s.id = ' . $id . ' AND s.location_id = l.id';
+
+	# Execute the query
+	$results = mysqli_query( $dbc , $query ) ;
+	check_results($results) ;
+
+  # Show results
+  if( $results ) {
+    # But...wait until we know the query succeeded before
+    # rendering the table start.
+    if ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) ) {
+      echo '<P>';
+      echo '<A HREF=limbo.php>Limbo</A> > ';
+      echo '<A HREF=lost.php>Lost something</A> > ';
+      echo $row['description'];
+      
+      echo '<H1>' . $row['description'] . '</H1>';
+      echo '<TABLE border=\"2px solid black\">';
+      
+      echo '<TR>';
+      echo '<TH ALIGN=center>ID</TH>';
+      echo '<TD ALIGN=left>' . $row['id'] . '</TD>';
+      echo '</TR>';
+      
+      echo '<TR>';
+      echo '<TH ALIGN=center>Item Status</TH>';
+      echo '<TD ALIGN=left>' . $row['item_status'] . '</TD>';
+      echo '</TR>';
+      
+      echo '<TR>';
+      echo '<TH ALIGN=center>Reported Date/Time</TH>';
+      echo '<TD ALIGN=left>' . $row['create_date'] . '</TD>';
+      echo '</TR>';
+      
+      echo '<TR>';
+      echo '<TH ALIGN=center>Update Date/Time</TH>';
+      echo '<TD ALIGN=left>' . $row['update_date'] . '</TD>';
+      echo '</TR>';
+      
+      echo '<TR>';
+      echo '<TH ALIGN=center>Last Known Location</TH>';
+      echo '<TD ALIGN=left>' . $row['name'] . '</TD>';
+      echo '</TR>';
+      
+      echo '<TR>';
+      echo '<TH ALIGN=center>Description</TH>';
+      echo '<TD ALIGN=left>' . $row['description'] . '</TD>';
+      echo '</TR>';
+    }
+
+    # End the table
+    echo '</TABLE>';
+    echo '<BR>';
+
+    # Free up the results in memory
+    mysqli_free_result( $results ) ;
+  }
+}
+
+# Displays the title on top of the browser.
+function show_title($dbc, $id) {
+  # Create a query to get the id, date, status, and description by date descending.
+	$query = 'SELECT id, description FROM stuff WHERE id=' . $id;
+
+	# Execute the query
+	$results = mysqli_query( $dbc , $query ) ;
+	check_results($results) ;
+
+  # Show results
+  if( $results ) {
+    # But...wait until we know the query succeeded before
+    # rendering the table start.
+    if ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) ) {
+      echo '<TITLE>Limbo - ' . $row['description'] . '</TITLE>';
+    }
+  }
+  
+  # Free up the results in memory
+  mysqli_free_result( $results ) ;
 }
 
 # Shows the query as a debugging aid
