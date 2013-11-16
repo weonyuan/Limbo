@@ -26,7 +26,7 @@
     
     <?php
       if ($_SERVER[ 'REQUEST_METHOD' ] == 'GET') {
-        if (isset($_GET['full'])) {
+        if (isset($_GET['full'], $_GET['id'])) {
           show_full_record($dbc, $_GET['id']) ;
         }
         else if (isset($_GET['id'])) {
