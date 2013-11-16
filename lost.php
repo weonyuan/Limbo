@@ -33,7 +33,7 @@
           <option value="183">6 months</option>
           <option value="365">year</option>
         </select>
-        <input type="submit" name="lost">
+        <input type="submit">
       </form>
     </div>
     

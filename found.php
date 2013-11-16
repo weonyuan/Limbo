@@ -1,25 +1,30 @@
+<!DOCTYPE HTML>
 <html>
   <head>
-    <title>Limbo - Home</title>
+    <title>Limbo - Found Something</title>
+    
+    <style>
+      td, th {
+        padding: 5px;
+      }
+    </style>
   </head>
   
   <body>
     <div>
-      <a href="lost.php">Lost something</a>;
-      <a href="found.php">Found something</a>;
-      <a href="admin.php">Admins</a>;
+      <a href="lost.php">Lost something</a>&nbsp;
+      <a href="found.php">Found something</a>&nbsp;
+      <a href="admin.php">Admins</a>
     </div>
     
-    <p><a href="limbo.php"> Home</a> > Found Something</p>
+    <p><a href="limbo.php">Home</a> > Found Something</p>
     
     <h1>Found Something</h1>
-    <div>
-         If you have found something, search for it here!
-    </div>
+    <div>If you have found something, search for it here!</div>
     
-   <div>
-      <form action="found.php" method="POST">
-        <input type="search" name="item"> <input type="submit">
+    <div>
+      <form action="found.php">
+        <input type="search" name="item">
         Reported in last
         <select name="lastReported">
           <option value="7">week</option>
@@ -28,25 +33,28 @@
           <option value="183">6 months</option>
           <option value="365">year</option>
         </select>
+        <input type="submit">
       </form>
     </div>
-	
-	<?php
+    
+    <?php
       # Connect to MySQL server and the database
       require( 'includes/connect_limbo_db.php' ) ;
 
       # Connect to MySQL server and the database
-      require( 'includes/found_tools.php' );
+      require( 'includes/helpers.php' );
       
-      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $item = $_POST['item'];
-        $reportedDate = $_POST['lastReported'];
-        //load('found.php', $item);
-        show_link_records($dbc, $item, $reportedDate);
+      if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        if (isset($_GET['item'])) {
+          $item = $_GET['item'];
+          $reportedDate = $_GET['lastReported'];
+          $status = 'found';
+          show_link_records($dbc, $item, $reportedDate, $status);
+        }
       }
 
       # Close the connection
       mysqli_close( $dbc );
-      ?>
+    ?>
   </body>
 </html>
