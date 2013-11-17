@@ -41,7 +41,7 @@ function show_init_records($dbc) {
       echo '<TR>' ;
       echo '<TD ALIGN=right>' . $alink . '</TD>' ;
       echo '<TD ALIGN=left>' . $row['update_date'] . '</TD>' ;
-      echo '<TD ALIGN=left>' . $row['item_status'] . '</TD>' ;
+      echo '<TD ALIGN=left>' . ucfirst($row['item_status']) . '</TD>';
       echo '<TD ALIGN=left>' . $alinkDesc . '</TD>' ;
       echo '</TR>' ;
     }
@@ -96,7 +96,7 @@ function show_filtered_records($dbc, $reportedDate) {
         echo '<TR>' ;
         echo '<TD ALIGN=right>' . $alink . '</TD>' ;
         echo '<TD ALIGN=left>' . $row['update_date'] . '</TD>' ;
-        echo '<TD ALIGN=left>' . $row['item_status'] . '</TD>' ;
+        echo '<TD ALIGN=left>' . ucfirst($row['item_status']) . '</TD>';
         echo '<TD ALIGN=left>' . $alinkDesc . '</TD>' ;
         echo '</TR>' ;
       }
