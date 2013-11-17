@@ -15,7 +15,7 @@ $debug = true;
 # Shows the records in stuff
 function show_init_records($dbc) {
   # Create a query to get the name and price sorted by price
-  $query = 'SELECT id, update_date, item_status, description FROM stuff ORDER BY update_date DESC' ;
+  $query = 'SELECT id, update_date, item_status, description, ticket_status FROM stuff ORDER BY update_date DESC' ;
 
   # Execute the query
   $results = mysqli_query( $dbc , $query ) ;
@@ -30,6 +30,7 @@ function show_init_records($dbc) {
     echo '<TH>Date/Time</TH>';
     echo '<TH>Item Status</TH>';
     echo '<TH>Stuff</TH>';
+    echo '<TH>Ticket Status</TH';
     echo '</TR>';
 
     # For each row result, generate a table row
@@ -43,6 +44,7 @@ function show_init_records($dbc) {
       echo '<TD ALIGN=left>' . $row['update_date'] . '</TD>' ;
       echo '<TD ALIGN=left>' . $row['item_status'] . '</TD>' ;
       echo '<TD ALIGN=left>' . $alinkDesc . '</TD>' ;
+      echo '<TD ALIGN=left>' . $row['ticket_status'] . '</TD>' ;
       echo '</TR>' ;
     }
 
@@ -63,7 +65,7 @@ function show_filtered_records($dbc, $reportedDate) {
   $reportedDate = 'DATE_SUB(Now(), INTERVAL ' . $reportedDate . ' DAY) ';
   
   # Create a query to get the id, date, status, and description by date descending.
-	$query = 'SELECT id, update_date, item_status, description FROM stuff ' .
+	$query = 'SELECT id, update_date, item_status, description, ticket_status FROM stuff ' .
            'WHERE update_date BETWEEN ' . $reportedDate . 'AND Now() ' .
            'ORDER BY update_date DESC' ;
 
@@ -85,6 +87,7 @@ function show_filtered_records($dbc, $reportedDate) {
       echo '<TH>Update Date</TH>';
       echo '<TH>Item Status</TH>';
       echo '<TH>Description</TH>';
+      echo '<TH>Ticket Status</TH';
       echo '</TR>';
 
       # For each row result, generate a table row
@@ -98,6 +101,7 @@ function show_filtered_records($dbc, $reportedDate) {
         echo '<TD ALIGN=left>' . $row['update_date'] . '</TD>' ;
         echo '<TD ALIGN=left>' . $row['item_status'] . '</TD>' ;
         echo '<TD ALIGN=left>' . $alinkDesc . '</TD>' ;
+        echo '<TD ALIGN=left>' . $row['ticket_status'] . '</TD>' ;
         echo '</TR>' ;
       }
 

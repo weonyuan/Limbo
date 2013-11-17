@@ -12,22 +12,7 @@ WY  14-Nov-13 Modified for Limbo. Added a link in item's description.
 # Set this flag to false to disable debug diagnostics.
 $debug = true;
 
-# Loads a specified or default URL.
-function load( $page = 'load.php', $item = '', $reportedDate = '0' ) {
-  # Begin URL with protocol, domain, and current directory.
-  $url = 'http://' . $_SERVER[ 'HTTP_HOST' ] . dirname( $_SERVER[ 'PHP_SELF' ] ) ;
 
-  # Remove trailing slashes then append page name, item name, and date to URL.
-  $url = rtrim( $url, '/\\' ) ;
-  $url .= '/' . $page . '?item=' . $item . '&date=' . $reportedDate;
-
-  # Execute redirect then quit.
-  session_start( );
-
-  header( "Location: $url" ) ;
-
-  exit() ;
-}
 
 # Shows the records in stuff
 function show_link_records($dbc, $item, $reportedDate, $status) {
@@ -120,13 +105,13 @@ function show_record($dbc, $id) {
       echo '</TR>';
       
       echo '<TR>';
-      echo '<TH ALIGN=center>Update Date/Time</TH>';
-      echo '<TD ALIGN=left>' . $row['update_date'] . '</TD>';
+      echo '<TH ALIGN=center>Item Status</TH>';
+      echo '<TD ALIGN=left>' . $row['item_status'] . '</TD>';
       echo '</TR>';
       
       echo '<TR>';
-      echo '<TH ALIGN=center>Item Status</TH>';
-      echo '<TD ALIGN=left>' . $row['item_status'] . '</TD>';
+      echo '<TH ALIGN=center>Update Date/Time</TH>';
+      echo '<TD ALIGN=left>' . $row['update_date'] . '</TD>';
       echo '</TR>';
       
       echo '<TR>';
