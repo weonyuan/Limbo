@@ -18,7 +18,7 @@ function load( $page = 'limbo.php', $pid = -1 )
 
   # Remove trailing slashes then append page name to URL and the presidents id.
   $url = rtrim( $url, '/\\' ) ;
-  $url .= '/' . $page . '?id=' . $pid;
+  $url .= '/' . $page;
 
   # Execute redirect then quit.
   session_start( );
