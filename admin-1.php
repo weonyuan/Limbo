@@ -9,6 +9,7 @@
     </style>
   </head>
   
+  <!-- Navigation Bar -->
   <body>
     <div>
       <a href="lost.php">Lost something</a>&nbsp;
@@ -16,10 +17,12 @@
       <a href="admin.php">Admins</a>
     </div>
     
+	<!-- Breadcrumbing -->
     <p><a href="limbo.php">Home</a> > <a href="admin.php">Admin Login</a> > Admin Options</p>
     
     <h1>Admin Options</h1>
-    
+	
+    <!-- Drop Down Menu -->
     <div>
       <form action="admin-1.php">
         Reported in last
@@ -51,6 +54,7 @@
       mysqli_close( $dbc ) ;
     ?>
 	
+	<!-- Bottom of the Page Navigation Bar -->
 	<p>
 	<div>
       <a href="addticket.php">Add Ticket</a>

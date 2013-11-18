@@ -4,7 +4,7 @@ Originally created By Ron Coleman.
 Revision history:
 Who	Date		Comment
 RC  07-Nov-13   Created.
-JE	07-Nov-13   Modified File for Presidents table.
+JE	15-Nov-13   Modified File for Admin Login.
 -->
 <!DOCTYPE html>
 <html>
@@ -12,14 +12,18 @@ JE	07-Nov-13   Modified File for Presidents table.
     <title>Limbo - Admin Login</title>
   </head>
   <body>
+	<!-- Navigation Bar -->
     <div>
       <a href="lost.php">Lost something</a>&nbsp;
       <a href="found.php">Found something</a>&nbsp;
       <a href="admin.php">Admins</a>
     </div>
+	
+	<!-- Breadcrumbing -->
     <div>
     <p><a href="limbo.php">Home</a> > Admin Login</p>
     </div>
+	
     <?php
     # Connect to MySQL server and the database
     require( 'includes/connect_limbo_db.php' ) ;

@@ -17,6 +17,7 @@
     </style>
   </head>
   
+  <!-- Navigation Bar -->
   <body>
     <div>
       <a href="lost.php">Lost something</a>&nbsp;
@@ -37,6 +38,7 @@
       mysqli_close( $dbc );
     ?>
     
+	<!-- Contact Info -->
     <table border="1px solid black" style="width: 500px;">
       <tr>
         <th style="text-align: left">

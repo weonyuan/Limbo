@@ -4,7 +4,7 @@ Orginally created by Ron Coleman.
 History:
 Who	Date		Comment
 RC	 7-Nov-13	Created.
-JE	07-Nov-13   Modified File for Presidents table.
+JE	15-Nov-13   Modified File for admin login of Limbo.
 -->
 <?php
 # Includes these helper functions
@@ -16,7 +16,7 @@ function load( $page = 'limbo.php', $pid = -1 )
   # Begin URL with protocol, domain, and current directory.
   $url = 'http://' . $_SERVER[ 'HTTP_HOST' ] . dirname( $_SERVER[ 'PHP_SELF' ] ) ;
 
-  # Remove trailing slashes then append page name to URL and the presidents id.
+  # Remove trailing slashes then append page name to URL.
   $url = rtrim( $url, '/\\' ) ;
   $url .= '/' . $page;
 
@@ -28,7 +28,7 @@ function load( $page = 'limbo.php', $pid = -1 )
   exit() ;
 }
 
-# Validates the president name.
+# Validates the username and password.
 # Returns -1 if validate fails, and >= 0 if it succeeds
 # which is the primary key id.
 function validate($username = '', $password ='')

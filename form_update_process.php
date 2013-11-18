@@ -1,8 +1,9 @@
 <html>
   <head>
-    <title>Limbo - Added Ticked</title>
+    <title>Limbo - Update Ticket Process</title>
   </head>
   
+  <!-- Navigation Bar -->
   <body>
     <div>
       <a href="lost.php">Lost something</a>
@@ -10,6 +11,7 @@
       <a href="admin.php">Admins</a>
     </div>
 	
+	<!-- Breadcrumbing -->
 	<p><a href="limbo.php"> Home</a> > <a href="admin.php"> Admin Login</a> > <a href="Admin-1.php"> Admin Options</a> > <a href="form_update.php"> Update Ticket</a> > Ticket Updated </p>
 	
 			<?php

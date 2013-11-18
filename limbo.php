@@ -10,6 +10,7 @@
     </style>
   </head>
   
+  <!-- Navigation Bar -->
   <body>
     <div>
       <a href="lost.php">Lost something</a>&nbsp;
@@ -17,6 +18,7 @@
       <a href="admin.php">Admins</a>
     </div>
     
+	<!-- Breadcrumbing -->
     <p>Home</a></p>
     
     <h1>Welcome to Limbo!</h1>
@@ -25,6 +27,7 @@
          this is the place to report it.
     </div>
     
+	<!-- Dropdown menu -->
     <div>
       <form action="limbo.php">
         Reported in last

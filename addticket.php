@@ -2,12 +2,15 @@
 	<head>
 		<title> Add Ticket </title>
 	</head>
+	
+	<!-- Navigation Bar -->
 	<div>
       <a href="lost.php">Lost something</a>&nbsp;
       <a href="found.php">Found something</a>&nbsp;
       <a href="admin.php">Admins</a>
 	</div>
 	
+	<!-- Breadcrumbing -->
 	<div>
 	<p><a href="limbo.php"> Home</a>  > <a href="admin.php"> Admin Login</a> > <a href="admin-1.php"> Admin Options</a> > Add ticket</p>
 	</div>
@@ -15,10 +18,11 @@
 	<body>
 	
 	<?php
-	//connect to limbo_db
+	#connect to limbo_db
 	require( '/includes/connect_limbo_db.php' ) ;
 	?>
-	
+
+	<!-- Creates form to add new item to limbo_db -->
 	<form action="form_process.php" method="post" name="add_ticket_form">
 		<p>
 		Description:
@@ -80,7 +84,7 @@
 		Item Status:
 		<input name="item_status" type="text" />
 		</p>
-	
+	<!-- Submit and Reset button -->
 	<input type="submit" name="submit" id="submit" value="Submit" />
 	<input type="reset" name="reset" id="reset" value="Reset" />
 	</form>

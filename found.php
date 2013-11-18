@@ -10,6 +10,7 @@
     </style>
   </head>
   
+  <!-- Navigation Bar -->
   <body>
     <div>
       <a href="lost.php">Lost something</a>&nbsp;
@@ -17,11 +18,13 @@
       <a href="admin.php">Admins</a>
     </div>
     
+	<!-- Breadcrumbing -->
     <p><a href="limbo.php">Home</a> > Found Something</p>
     
     <h1>Found Something</h1>
     <div>If you have found something, search for it here!</div>
     
+	<!-- Dropdown menu -->
     <div>
       <form action="found.php">
         <input type="search" name="item">

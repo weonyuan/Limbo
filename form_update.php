@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title> Edit Ticket </title>
+		<title> Update Ticket </title>
 	</head>
 	<div>
       <a href="lost.php">Lost something</a>&nbsp;
@@ -9,16 +9,17 @@
 	</div>
 	
 	<div>
-	<p><a href="limbo.php"> Home</a>  > <a href="admin.php"> Admin Login</a> > <a href="admin-1.php"> Admin Options</a> > Edit ticket</p>
+	<p><a href="limbo.php"> Home</a>  > <a href="admin.php"> Admin Login</a> > <a href="admin-1.php"> Admin Options</a> > Update ticket</p>
 	</div>
-	<h1>Limbo - Edit Ticket</h1>
+	<h1>Limbo - Update Ticket</h1>
 	<body>
 	
 	<?php
-	//connect to limbo_db
+	#connect to limbo_db
 	require( '/includes/connect_limbo_db.php' ) ;
 	?>
 	
+	<!-- Form for updating an item -->
 	<form action="form_update_process.php" method="get" name="edit_ticket_form">
 	
 		<p>
@@ -92,6 +93,7 @@
 		<input name="ticket_status" type="text" />
 		</p>
 	
+	<!-- Submit and reset buttons -->
 	<input type="submit" name="submit" id="submit" value="Submit" />
 	<input type="reset" name="reset" id="reset" value="Reset" />
 	</form>

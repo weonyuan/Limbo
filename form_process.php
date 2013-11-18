@@ -1,8 +1,9 @@
 <html>
   <head>
-    <title>Limbo - Added Ticked</title>
+    <title>Limbo - Add Ticked Process</title>
   </head>
   
+  <!-- Navigation Bar -->
   <body>
     <div>
       <a href="lost.php">Lost something</a>
@@ -10,6 +11,7 @@
       <a href="admin.php">Admins</a>
     </div>
 	
+	<!-- Breadcrumbing -->
 	<p><a href="limbo.php"> Home</a> > <a href="admin.php"> Admin Login</a> > <a href="Admin-1.php"> Admin Options</a> > <a href="addticket.php"> Add Ticket</a> > Ticket Added </p>
 	
 		<?php
@@ -41,11 +43,8 @@
 		$item_status = $_POST['item_status'];
 		$location = $_POST['location'];
 
-
 		#insert data into table
 		$sql = "INSERT INTO stuff (location_id, description, create_date, update_date, room, owner, finder, item_status, ticket_status) VALUES ('$location', '$description', Now(), Now(), '$room', '$owner', '$finder', '$item_status', 'open')";
-
-
 
 		#error check
 		if (!mysql_query($sql)) 

@@ -14,7 +14,7 @@ $debug = true;
 
 # Shows the records in stuff
 function show_init_records($dbc) {
-  # Create a query to get the name and price sorted by price
+  # Create a query to get the id, update date, item status, description sorted by update date
   $query = 'SELECT id, update_date, item_status, description FROM stuff ORDER BY update_date DESC' ;
 
   # Execute the query
