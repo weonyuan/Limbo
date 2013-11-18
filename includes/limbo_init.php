@@ -78,7 +78,6 @@ function show_filtered_records($dbc, $reportedDate) {
     if( $results ) {
       # But...wait until we know the query succeeded before
       # rendering the table start.
-      echo '<BR>';
       echo '<TABLE border=\"2px solid black\">';
       echo '<TR>';
       echo '<TH>ID</TH>';
