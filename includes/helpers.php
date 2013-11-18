@@ -56,7 +56,7 @@ function show_link_records($dbc, $item, $reportedDate, $status) {
         echo '<TR>' ;
         echo '<TD ALIGN=right>' . $alink . '</TD>' ;
         echo '<TD ALIGN=left>' . $row['update_date'] . '</TD>' ;
-        echo '<TD ALIGN=left>' . $row['item_status'] . '</TD>' ;
+        echo '<TD ALIGN=left>' . ucfirst($row['item_status']) . '</TD>';
         echo '<TD ALIGN=left>' . $alinkDesc . '</TD>' ;
         echo '</TR>' ;
       }
@@ -93,7 +93,8 @@ function show_record($dbc, $id) {
     if ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) ) {
       echo '<P>';
       echo '<A HREF=limbo.php>Limbo</A> > ';
-      echo '<A HREF=lost.php>Lost something</A> > ';
+      echo '<A HREF=' . $row['item_status'] . '.php>' .
+            ucfirst($row['item_status']) . ' something</A> > ';
       echo $row['description'];
       
       echo '<H1>' . $row['description'] . '</H1>';
@@ -106,7 +107,7 @@ function show_record($dbc, $id) {
       
       echo '<TR>';
       echo '<TH ALIGN=center>Item Status</TH>';
-      echo '<TD ALIGN=left>' . $row['item_status'] . '</TD>';
+      echo '<TD ALIGN=left>' . ucfirst($row['item_status']) . '</TD>';
       echo '</TR>';
       
       echo '<TR>';
@@ -149,7 +150,8 @@ function show_full_record($dbc, $id) {
     if ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) ) {
       echo '<P>';
       echo '<A HREF=limbo.php>Limbo</A> > ';
-      echo '<A HREF=lost.php>Lost something</A> > ';
+      echo '<A HREF=' . $row['item_status'] . '.php>' .
+            ucfirst($row['item_status']) . ' something</A> > ';
       echo $row['description'];
       
       echo '<H1>' . $row['description'] . '</H1>';
@@ -162,7 +164,7 @@ function show_full_record($dbc, $id) {
       
       echo '<TR>';
       echo '<TH ALIGN=center>Item Status</TH>';
-      echo '<TD ALIGN=left>' . $row['item_status'] . '</TD>';
+      echo '<TD ALIGN=left>' . ucfirst($row['item_status']) . '</TD>';
       echo '</TR>';
       
       echo '<TR>';
