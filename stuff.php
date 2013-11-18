@@ -5,7 +5,7 @@
       # Connect to MySQL server and the database
       require( 'includes/connect_limbo_db.php' ) ;
 
-      # Connect to MySQL server and the database
+      # Connects to a helpers file that sets up the table
       require( 'includes/helpers.php' );
       
       show_title($dbc, $_GET['id']);
@@ -38,7 +38,7 @@
       mysqli_close( $dbc );
     ?>
     
-	<!-- Contact Info -->
+    <!-- Contact Info -->
     <table border="1px solid black" style="width: 500px;">
       <tr>
         <th style="text-align: left">

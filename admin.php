@@ -21,28 +21,28 @@ JE	15-Nov-13   Modified File for Admin Login.
 	
 	<!-- Breadcrumbing -->
     <div>
-    <p><a href="limbo.php">Home</a> > Admin Login</p>
+      <p><a href="limbo.php">Home</a> > Admin Login</p>
     </div>
 	
     <?php
-    # Connect to MySQL server and the database
-    require( 'includes/connect_limbo_db.php' ) ;
+      # Connect to MySQL server and the database
+      require( 'includes/connect_limbo_db.php' ) ;
 
-    # Connect to MySQL server and the database
-    require( 'includes/admin_login_tools.php' ) ;
+      # Connect to MySQL server and the database
+      require( 'includes/admin_login_tools.php' ) ;
 
-    if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
+      if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 
-      $name = $_POST['username'] ;
+        $name = $_POST['username'] ;
 
-        $pid = validate($name) ;
+          $pid = validate($name) ;
 
-        if($pid == -1)
-          echo '<P style=color:red>Login failed please try again.</P>' ;
+          if($pid == -1)
+            echo '<P style=color:red>Login failed please try again.</P>' ;
 
-        else
-          load('admin-1.php', $pid);
-    }
+          else
+            load('admin-1.php', $pid);
+      }
     ?>
     <!-- Get inputs from the user. -->
     <h1>Admin Login</h1>

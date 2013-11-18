@@ -18,7 +18,10 @@
     </div>
     
 	<!-- Breadcrumbing -->
-    <p><a href="limbo.php">Home</a> > <a href="admin.php">Admin Login</a> > Admin Options</p>
+    <p>
+      <a href="limbo.php">Home</a> > 
+      <a href="admin.php">Admin Login</a> > Admin Options
+    </p>
     
     <h1>Admin Options</h1>
 	

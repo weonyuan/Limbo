@@ -47,6 +47,8 @@
     <?php
       # Connect to MySQL server and the database
       require('/includes/connect_limbo_db.php');
+      
+      # Connects to a helpers file that sets up the table
       require('/includes/limbo_init.php');
       
       if(isset($_GET['lastReported'])) {

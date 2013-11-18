@@ -44,7 +44,7 @@
       # Connect to MySQL server and the database
       require( 'includes/connect_limbo_db.php' ) ;
 
-      # Connect to MySQL server and the database
+      # Connects to a helpers file that sets up the table
       require( 'includes/helpers.php' );
       
       if ($_SERVER['REQUEST_METHOD'] == 'GET') {
