@@ -133,7 +133,7 @@ function show_record($dbc, $id) {
 # Shows the selected record in complete info.
 function show_full_record($dbc, $id) {
   # Create a query to get the id, date, status, and description by date descending.
-	$query = 'SELECT s.id, s.create_date, s.update_date, s.item_status, l.name, s.description ' .
+	$query = 'SELECT s.id, s.create_date, s.update_date, s.item_status, l.name, s.room, s.description ' .
            'FROM stuff s, locations l ' .
            'WHERE s.id = ' . $id . ' AND s.location_id = l.id';
 
@@ -177,7 +177,7 @@ function show_full_record($dbc, $id) {
       
       echo '<TR>';
       echo '<TH ALIGN=center>Last Known Location</TH>';
-      echo '<TD ALIGN=left>' . $row['name'] . '</TD>';
+      echo '<TD ALIGN=left>' . $row['name'] . ' ' . $row['room'] . '</TD>';
       echo '</TR>';
       
       echo '<TR>';
