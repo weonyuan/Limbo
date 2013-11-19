@@ -51,7 +51,7 @@
         if (isset($_GET['item'])) {
           $item = $_GET['item'];
           $reportedDate = $_GET['lastReported'];
-          $status = 'lost';
+          $status = 'found';
           show_link_records($dbc, $item, $reportedDate, $status);
         }
       }

@@ -15,11 +15,12 @@ $debug = true;
 # Shows the records in stuff
 function show_link_records($dbc, $item, $reportedDate, $status) {
   $item = ' \'%' . $item . '%\' ';
+  $stringDate = 'DATE_FORMAT(update_date, \'%b. %D%, %Y at %r\') as date' ;
   $reportedDate = 'DATE_SUB(Now(), INTERVAL ' . $reportedDate . ' DAY) ';
   $status = '\'' . $status . '\'';
   
   # Create a query to get the id, date, status, and description by date descending.
-	$query = 'SELECT id, update_date, item_status, description FROM stuff ' .
+	$query = 'SELECT id, ' . $stringDate . ', item_status, description FROM stuff ' .
            'WHERE description LIKE' . $item . 'AND item_status = ' . $status .
            'AND update_date BETWEEN ' . $reportedDate . 'AND Now() ' .
            'ORDER BY update_date DESC' ;
@@ -50,10 +51,10 @@ function show_link_records($dbc, $item, $reportedDate, $status) {
         $alink = '<A HREF=stuff.php?id=' . $row['id'] . '>' .
                  $row['id'] . '</A>' ;
         $alinkDesc = '<A HREF=stuff.php?id=' . $row['id'] . '>' .
-                 $row['description'] . '</A>' ;
+                 ucfirst($row['description']) . '</A>' ;
         echo '<TR>' ;
         echo '<TD ALIGN=right>' . $alink . '</TD>' ;
-        echo '<TD ALIGN=left>' . $row['update_date'] . '</TD>' ;
+        echo '<TD ALIGN=left>' . $row['date'] . '</TD>' ;
         echo '<TD ALIGN=left>' . ucfirst($row['item_status']) . '</TD>';
         echo '<TD ALIGN=left>' . $alinkDesc . '</TD>' ;
         echo '</TR>' ;
@@ -74,7 +75,8 @@ function show_link_records($dbc, $item, $reportedDate, $status) {
 # Shows the selected record in quick link.
 function show_record($dbc, $id) {
   # Create a query to get the id, date, status, and description by date descending.
-	$query = 'SELECT id, update_date, item_status, description FROM stuff ' .
+  $stringDate = 'DATE_FORMAT(update_date, \'%b. %D%, %Y at %r\') as date' ;
+	$query = 'SELECT id, ' . $stringDate . ', item_status, description FROM stuff ' .
            'WHERE id=' . $id;
 
 	# Execute the query
@@ -93,9 +95,9 @@ function show_record($dbc, $id) {
       echo '<A HREF=limbo.php>Limbo</A> > ';
       echo '<A HREF=' . $row['item_status'] . '.php>' .
             ucfirst($row['item_status']) . ' something</A> > ';
-      echo $row['description'];
+      echo ucfirst($row['description']);
       
-      echo '<H1>' . $row['description'] . '</H1>';
+      echo '<H1>' . ucfirst($row['description']) . '</H1>';
       echo '<TABLE border=\"2px solid black\">';
       
       echo '<TR>';
@@ -110,12 +112,12 @@ function show_record($dbc, $id) {
       
       echo '<TR>';
       echo '<TH ALIGN=center>Update Date/Time</TH>';
-      echo '<TD ALIGN=left>' . $row['update_date'] . '</TD>';
+      echo '<TD ALIGN=left>' . $row['date'] . '</TD>';
       echo '</TR>';
       
       echo '<TR>';
       echo '<TH ALIGN=center>Description</TH>';
-      echo '<TD ALIGN=left>' . $row['description'] . '</TD>';
+      echo '<TD ALIGN=left>' . ucfirst($row['description']) . '</TD>';
       echo '</TR>';
     }
 
@@ -133,7 +135,9 @@ function show_record($dbc, $id) {
 # Shows the selected record in complete info.
 function show_full_record($dbc, $id) {
   # Create a query to get the id, date, status, and description by date descending.
-	$query = 'SELECT s.id, s.create_date, s.update_date, s.item_status, l.name, s.room, s.description ' .
+  $stringCreateDate = 'DATE_FORMAT(s.create_date, \'%b. %D%, %Y at %r\') as createDate, ' ;
+  $stringUpdateDate = 'DATE_FORMAT(s.update_date, \'%b. %D%, %Y at %r\') as updateDate' ;
+	$query = 'SELECT s.id, ' . $stringCreateDate . $stringUpdateDate . ', s.item_status, l.name, s.room, s.description ' .
            'FROM stuff s, locations l ' .
            'WHERE s.id = ' . $id . ' AND s.location_id = l.id';
 
@@ -150,9 +154,9 @@ function show_full_record($dbc, $id) {
       echo '<A HREF=limbo.php>Limbo</A> > ';
       echo '<A HREF=' . $row['item_status'] . '.php>' .
             ucfirst($row['item_status']) . ' something</A> > ';
-      echo $row['description'];
+      echo ucfirst($row['description']);
       
-      echo '<H1>' . $row['description'] . '</H1>';
+      echo '<H1>' . ucfirst($row['description']) . '</H1>';
       echo '<TABLE border=\"2px solid black\">';
       
       echo '<TR>';
@@ -167,12 +171,12 @@ function show_full_record($dbc, $id) {
       
       echo '<TR>';
       echo '<TH ALIGN=center>Reported Date/Time</TH>';
-      echo '<TD ALIGN=left>' . $row['create_date'] . '</TD>';
+      echo '<TD ALIGN=left>' . $row['createDate'] . '</TD>';
       echo '</TR>';
       
       echo '<TR>';
       echo '<TH ALIGN=center>Update Date/Time</TH>';
-      echo '<TD ALIGN=left>' . $row['update_date'] . '</TD>';
+      echo '<TD ALIGN=left>' . $row['updateDate'] . '</TD>';
       echo '</TR>';
       
       echo '<TR>';
@@ -182,7 +186,7 @@ function show_full_record($dbc, $id) {
       
       echo '<TR>';
       echo '<TH ALIGN=center>Description</TH>';
-      echo '<TD ALIGN=left>' . $row['description'] . '</TD>';
+      echo '<TD ALIGN=left>' . ucfirst($row['description']) . '</TD>';
       echo '</TR>';
     }
 
@@ -209,7 +213,7 @@ function show_title($dbc, $id) {
     # But...wait until we know the query succeeded before
     # rendering the table start.
     if ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) ) {
-      echo '<TITLE>Limbo - ' . $row['description'] . '</TITLE>';
+      echo '<TITLE>Limbo - ' . ucfirst($row['description']) . '</TITLE>';
     }
   }
   

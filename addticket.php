@@ -36,11 +36,6 @@
       </p>
       
       <p>
-        Room:
-        <input name="room" type="text" />
-      </p>
-      
-      <p>
         Location:
         <select name="location">
           <option value="1">Byrne House</option>
@@ -75,6 +70,12 @@
           <option value="30">Lower Fulton Townhouses</option>
           <option value="31">Hancock Center</option>
         </select>
+      </p>
+      
+      <p>
+        Room:
+        <input name="room" type="text" />
+      </p>
       
       <p>
         Owner (If Applies):
@@ -88,7 +89,10 @@
       
       <p>
         Item Status:
-        <input name="item_status" type="text" />
+        <select name="item_status">
+          <option value="lost">Lost</option>
+          <option value="found">Found</option>
+        </select>
       </p>
       <!-- Submit and Reset button -->
       <input type="submit" name="submit" id="submit" value="Submit" />
