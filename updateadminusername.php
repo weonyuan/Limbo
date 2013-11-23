@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Limbo - Change Admin Password </title>
+		<title>Limbo - Change Admin Username </title>
 	</head>
 	
   <body>
@@ -14,11 +14,11 @@
       <p>
         <a href="limbo.php">Home</a>  > 
         <a href="admin.php">Admin Login</a> > 
-        <a href="admin-1.php">Admin Options</a> > Change Admin Password
+        <a href="admin-1.php">Admin Options</a> > Change Admin Username
       </p>
     </div>
     
-    <h1>Limbo - Change Admin Password</h1>
+    <h1>Limbo - Change Admin Username</h1>
     
     <?php
       #connect to limbo_db
@@ -26,15 +26,20 @@
     ?>
 	
     <!-- Form for updating an item -->
-    <form action="password_update_process.php" method="get" name="password_update_form">
+    <form action="username_update_process.php" method="get" name="username_update_form">
     
       <p>
-        Username:
+        ID:
+        <input name="id" type="int" />
+      </p>
+	  
+	  <p>
+        New Username:
         <input name="username" type="text" />
       </p>
       
       <p>
-        New Password:
+        Password:
         <input name="password" type="password" />
       </p>
     
