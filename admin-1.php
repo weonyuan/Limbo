@@ -63,8 +63,8 @@
       <a href="addticket.php">Add Ticket</a>
 	  <a href="form_update.php">Update Ticket</a>
 	  <a href="delete_ticket.php">Delete Ticket</a>
-      <a href="#">Add New User</a>
-      <a href="#">Change Password</a>
+      <a href="addadminform.php">Add New Admin</a>
+      <a href="updateadminpassword.php">Change Admin Password</a>
     </div>
     </p>
   </body>
