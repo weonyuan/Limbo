@@ -46,7 +46,7 @@
         $password = $_GET['password'];
 
         #update data in table
-        $sql = "UPDATE users SET username = '$username' WHERE id = '$id' AND password = '$password'";
+        $sql = "UPDATE users SET username = '$username' WHERE id = $id AND password = '$password'";
 
         mysql_query($sql, $link);
 

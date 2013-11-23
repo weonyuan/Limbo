@@ -66,6 +66,7 @@
       <a href="addadminform.php">Add New Admin</a>
 	  <a href="updateadminusername.php">Change Admin Username</a>
       <a href="updateadminpassword.php">Change Admin Password</a>
+	  <a href="deleteadmin.php">Delete Admin</a>
     </div>
     </p>
   </body>
