@@ -2,6 +2,12 @@
 <html>
 	<head>
 		<title>Limbo - Delete Ticket </title>
+    
+    <style>
+      td, th {
+        padding: 5px;
+      }
+    </style>
 	</head>
 	
 	<body>
@@ -26,18 +32,12 @@
     <?php
       #connect to limbo_db
       require( '/includes/connect_limbo_db.php' ) ;
+      require( '/includes/delete_tools.php' ) ;
+            
+      if(isset($_GET['id'])) {
+        $id = $_GET['id'];
+        confirm_delete($dbc, $id);
+      }
     ?>
-	
-    <!-- Form for deletion of item -->
-    <form action="delete.php" name="delete_ticket_form">
-      
-      <p>Please enter the item's ID you wish to delete.</p>
-      <p>
-        ID:
-        <input name="id" type="int" size="5" />
-        <input type="submit" value="Delete" />
-      </p>
-      
-    </form>
 	</body>
 </html>

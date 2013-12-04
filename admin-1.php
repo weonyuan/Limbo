@@ -44,8 +44,13 @@
       # Connect to MySQL server and the database
       require('/includes/connect_limbo_db.php');
       require('/includes/admin_init.php');
+      require('/includes/delete_tools.php');
       
-      if(isset($_GET['lastReported'])) {
+      if (isset($_GET['deleted']) == "true") {
+        echo '<P STYLE=color:red;>Item has been successfully deleted.</P>';
+        show_init_records($dbc);
+      }
+      else if(isset($_GET['lastReported'])) {
         $reportedDate = $_GET['lastReported'];
         show_filtered_records($dbc, $reportedDate);
       }
@@ -58,16 +63,22 @@
     ?>
 	
 	<!-- Bottom of the Page Navigation Bar -->
-	<p>
-	<div>
-      <a href="addticket.php">Add Ticket</a>
-	  <a href="form_update.php">Update Ticket</a>
-	  <a href="delete_ticket.php">Delete Ticket</a>
-      <a href="addadminform.php">Add New Admin</a>
-	  <a href="updateadminusername.php">Change Admin Username</a>
-      <a href="updateadminpassword.php">Change Admin Password</a>
-	  <a href="deleteadmin.php">Delete Admin</a>
-    </div>
+    <p>
+      <div>
+        <div>
+          Ticket Action(s) |
+          <a href="addticket.php">Add Ticket</a>
+          <a href="form_update.php">Update Ticket</a>
+          <a href="delete_ticket.php">Delete Ticket</a>
+        </div>
+        <div>
+          Admin Action(s) |
+          <a href="addadminform.php">Add New Admin</a>
+          <a href="updateadminusername.php">Change Username</a>
+          <a href="updateadminpassword.php">Change Password</a>
+          <a href="deleteadmin.php">Delete Admin</a>
+        </div>
+      </div>
     </p>
   </body>
 </html>
