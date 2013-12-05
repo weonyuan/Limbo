@@ -12,6 +12,116 @@ WY  14-Nov-13 Modified for Limbo. Added a link in item's description.
 # Set this flag to false to disable debug diagnostics.
 $debug = true;
 
+# Initializes the database
+function init() {
+    # The dabase we connect to
+    $DB_NAME = 'limbo_db';
+
+    # Connect to the database, create it if necessary
+    $dbc = connect_db($DB_NAME);
+
+    # Populate the database
+    populate_db($dbc);
+
+    return $dbc;
+}
+
+# Populates the database
+function populate_db($dbc) {
+    # Create prints table, if it doesnt exist
+    $query  = 'CREATE TABLE IF NOT EXISTS users (';
+    $query .= '  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, ';
+    $query .= '  username VARCHAR(60) NOT NULL,';
+    $query .= '  password VARCHAR(40) NOT NULL,';
+    $query .= '  reg_date DATETIME    NOT NULL';
+    $query .= ')';
+    show_query($query);
+    
+    $results = mysqli_query($dbc,$query);
+    check_results( $results );
+    
+    $query  = 'CREATE TABLE IF NOT EXISTS stuff (';
+    $query .= '  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, ';
+    $query .= '  location_id VARCHAR(60) NOT NULL,';
+    $query .= '  description VARCHAR(40) NOT NULL,';
+    $query .= '  create_date DATETIME    NOT NULL,';
+    $query .= '  update_date DATETIME    NOT NULL,';
+    $query .= '  room        TEXT,';
+    $query .= '  owner       TEXT,';
+    $query .= '  finder      TEXT,';
+    $query .= '  item_status SET ("found", "lost", "claimed") NOT NULL';
+    $query .= ')';
+    show_query($query);
+    
+    $results = mysqli_query($dbc,$query);
+    check_results( $results );
+    
+    $query  = 'CREATE TABLE IF NOT EXISTS locations (';
+    $query .= '  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, ';
+    $query .= '  create_date DATETIME    NOT NULL,';
+    $query .= '  update_date DATETIME    NOT NULL,';
+    $query .= '  name        TEXT        NOT NULL';
+    $query .= ')';
+    show_query($query);
+
+    $results = mysqli_query($dbc,$query);
+    check_results( $results );
+
+    # Check if table is already populated
+    $query = 'SELECT COUNT(*) FROM stuff';
+    show_query( $query );
+
+    $results = mysqli_query($dbc,$query);
+    check_results( $results );
+
+    if($results) {
+        $row = mysqli_fetch_array($results, MYSQLI_NUM);
+
+        if($row[0] > 0)
+            return;
+    }
+
+    # If we get here, populate the table
+    #$query = 'INSERT INTO users(username, password, reg_date) VALUES ("admin", "gaze11e", Now())';
+    $query = 'INSERT INTO stuff(location_id, description, create_date, update_date, room, owner, finder, item_status) VALUES (1, "My backpack", Now(), Now(), "Weon Yuan", "Hancock", "", "Lost")';
+    show_query($query);
+
+    $results = mysqli_query($dbc,$query);
+    check_results( $results );
+}
+
+# Connects to the database and creates one, if necessary.
+function connect_db ($dbname) {
+    # Connect to the database, if we fail assume the DB doesnt exist
+    $dbc = @mysqli_connect ( 'localhost', 'root', '', $dbname );
+
+    if($dbc) {
+        mysqli_set_charset( $dbc, 'utf8' ) ;
+        return $dbc;
+    }
+
+    # Create the database
+    $dbc = @mysqli_connect ( 'localhost', 'root', '', '' );
+
+    $query = 'CREATE DATABASE limbo_db';
+    show_query( $query );
+
+    $results = mysqli_query($dbc, $query);
+    check_results($results);
+
+    # Close connection since we dont need it
+    mysqli_close( $dbc );
+
+    # Connect to the (newly created) database
+    $dbc = @mysqli_connect ( 'localhost', 'root', '', $dbname )
+        OR die ( mysqli_connect_error() ) ;
+
+    # Set encoding to match PHP script encoding.
+    mysqli_set_charset( $dbc, 'utf8' ) ;
+
+    return $dbc;
+}
+
 # Shows the records in stuff
 function show_link_records($dbc, $item, $reportedDate, $status) {
   $item = ' \'%' . $item . '%\' ';

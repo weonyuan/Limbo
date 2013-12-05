@@ -46,17 +46,25 @@
     
     <?php
       # Connect to MySQL server and the database
-      require('/includes/connect_limbo_db.php');
+      #require('/includes/connect_limbo_db.php');
+      
+      # Includes these helper functions
+      require( 'includes/helpers.php' ) ;
+      
+      # Initialize the database
+      $dbc = init();
       
       # Connects to a helpers file that sets up the table
       require('/includes/limbo_init.php');
       
-      if(isset($_GET['lastReported'])) {
-        $reportedDate = $_GET['lastReported'];
-        show_filtered_records($dbc, $reportedDate);
-      }
-      else {
-        show_init_records($dbc);
+      if($_SERVER[ 'REQUEST_METHOD' ] == 'GET') {
+        if(isset($_GET['lastReported'])) {
+          $reportedDate = $_GET['lastReported'];
+          show_filtered_records($dbc, $reportedDate);
+        }
+        else {
+          show_init_records($dbc);
+        }
       }
       # Close the connection
       mysqli_close( $dbc );
