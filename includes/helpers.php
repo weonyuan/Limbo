@@ -35,7 +35,6 @@ function populate_db($dbc) {
     $query .= '  password VARCHAR(40) NOT NULL,';
     $query .= '  reg_date DATETIME    NOT NULL';
     $query .= ')';
-    show_query($query);
     
     $results = mysqli_query($dbc,$query);
     check_results( $results );
@@ -51,7 +50,6 @@ function populate_db($dbc) {
     $query .= '  finder      TEXT,';
     $query .= '  item_status SET ("found", "lost", "claimed") NOT NULL';
     $query .= ')';
-    show_query($query);
     
     $results = mysqli_query($dbc,$query);
     check_results( $results );
@@ -62,14 +60,12 @@ function populate_db($dbc) {
     $query .= '  update_date DATETIME    NOT NULL,';
     $query .= '  name        TEXT        NOT NULL';
     $query .= ')';
-    show_query($query);
 
     $results = mysqli_query($dbc,$query);
     check_results( $results );
 
     # Check if table is already populated
     $query = 'SELECT COUNT(*) FROM stuff';
-    show_query( $query );
 
     $results = mysqli_query($dbc,$query);
     check_results( $results );
@@ -81,12 +77,203 @@ function populate_db($dbc) {
             return;
     }
 
-    # If we get here, populate the table
-    #$query = 'INSERT INTO users(username, password, reg_date) VALUES ("admin", "gaze11e", Now())';
-    $query = 'INSERT INTO stuff(location_id, description, create_date, update_date, room, owner, finder, item_status) VALUES (1, "My backpack", Now(), Now(), "Weon Yuan", "Hancock", "", "Lost")';
-    show_query($query);
-
+    # If we get here, populate the users table
+    $query = 'INSERT INTO users(username, password, reg_date) VALUES ("admin", "gaze11e", Now())';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	
+	#Populate the Locations table
+    $query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Byrne House")';
+   
     $results = mysqli_query($dbc,$query);
+    check_results( $results );
+
+    $query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "James A. Cannavino Library")';
+    
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Champagnat Hall")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "James A. Cannavino Library")';
+
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Our Lady Seat of Wisdom Chapel")';
+
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Cornell Boathouse")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Donnelly Hall")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Dyson Center")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Fern Tor")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Fonataine Hall")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );	
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Gartland Apartments")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Greystone Hall")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Kieran Gatehouse")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Kirk House")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Leo Hall")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Longview Park")';
+
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Lowell Thomas Communications Center")';
+
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Lower Townhouses")';
+
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Marist Boathouse")';
+
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "McCann Recreational Center")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Midrise Hall")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "St. Anns Hermitage")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "St. Peters")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Sheahan Hall")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Steel Plant Studios and Gallery")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Student Center")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Foy Townhouses")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Lower West Cedar Townhouses")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Upper West Cedar Townhouses")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Fulton Street Townhouses")';
+
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Lower Fulton Townhouses")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Hancock Center")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	#Populate the stuff table
+    $query = 'INSERT INTO stuff(location_id, description, create_date, update_date, room, owner, finder, item_status)  VALUES (18, "Red Marist Crew backpack", "2012-12-04 12:43:32", "2012-12-10 15:24:16", "Downstairs", "Jack Daniels", "John Doe", "lost")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO stuff(location_id, description, create_date, update_date, room, owner, finder, item_status)  VALUES (31, "4th Generation Silver iPad", "2013-09-12 09:23:12", "2013-11-03 14:54:34", "2020", "", "Joe Smith", "lost")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO stuff(location_id, description, create_date, update_date, room, owner, finder, item_status)  VALUES (9, "Red Marist planner", "2013-10-24 11:23:18", "2013-10-31 18:21:48", "105", "Sally White", "", "lost")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO stuff(location_id, description, create_date, update_date, room, owner, finder, item_status)  VALUES (14, "Mail and Room Key on a red Marist lanyard", "2013-04-16 017:20:41", "2013-04-20 20:14:44", "2nd Floor Hallway", "", "Kaitlyn Jobe", "found")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO stuff(location_id, description, create_date, update_date, room, owner, finder, item_status)  VALUES (16, "Brown leather wallet", "2013-10-08 08:39:11", "2013-10-10 16:34:19", "020", "", "Weon Yuan", "found")';
+	
+	$results = mysqli_query($dbc,$query);
+    check_results( $results );
+	
+	$query = 'INSERT INTO stuff(location_id, description, create_date, update_date, room, owner, finder, item_status)  VALUES (23, "Macbook Pro with green sleeve", "2013-01-27 09:54:12", "2013-01-30 12:16:59", "Lounge", "", "Miles Welsh", "found")';
+	
+	$results = mysqli_query($dbc,$query);
     check_results( $results );
 }
 
@@ -104,7 +291,7 @@ function connect_db ($dbname) {
     $dbc = @mysqli_connect ( 'localhost', 'root', '', '' );
 
     $query = 'CREATE DATABASE limbo_db';
-    show_query( $query );
+    #show_query( $query );
 
     $results = mysqli_query($dbc, $query);
     check_results($results);
