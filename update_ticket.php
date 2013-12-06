@@ -1,9 +1,11 @@
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<title>Limbo - Update Ticket </title>
 	</head>
 	
   <body>
+    <!-- Navigation Bar -->
     <div>
       <a href="lost.php">Lost something</a>&nbsp;
       <a href="found.php">Found something</a>&nbsp;
@@ -11,6 +13,7 @@
     </div>
     
     <div>
+      <!-- Breadcrumbing -->
       <p>
         <a href="limbo.php">Home</a>  > 
         <a href="admin.php">Admin Login</a> > 
@@ -35,6 +38,7 @@
         $owner = $_POST['owner'];
         $finder = $_POST['finder'];
         
+        # Validation, checks for empty fields
         if (!valid_number($id)) {
           echo '<p style="color:red; font-size: 16px;">Please enter a valid ID!</p>';
         }
@@ -57,7 +61,9 @@
       }
       mysqli_close($dbc);
     ?>
-	
+    
+    <p>Please enter the fields below.</p>
+    
     <!-- Form for updating an item -->
     <form action="update_ticket.php" method="POST" name="update_ticket_form">
       <table>

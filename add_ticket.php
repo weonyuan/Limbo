@@ -60,7 +60,9 @@
       
       mysqli_close($dbc);
     ?>
-
+    
+    <p>Please enter the fields below.</p>
+    
     <!-- Creates form to add new item to limbo_db -->
     <form action="add_ticket.php" method="POST" name="add_ticket_form">
       <table>

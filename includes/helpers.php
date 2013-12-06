@@ -7,10 +7,11 @@ Who	Date		Comment
 RC	 3-Oct-13	Created.
 RC	30-Oct-13	Added show_record and show_link_records.
 WY  14-Nov-13 Modified for Limbo. Added a link in item's description.
+JE   6-Dec-13 Added init and populate_db functions.
 */
 
 # Set this flag to false to disable debug diagnostics.
-$debug = true;
+$debug = false;
 
 # Initializes the database
 function init() {
@@ -81,16 +82,16 @@ function populate_db($dbc) {
     $query = 'INSERT INTO users(username, password, reg_date) VALUES ("admin", "gaze11e", Now())';
 	
 	$results = mysqli_query($dbc,$query);
-    check_results( $results );
+  check_results( $results );
 	
 	
 	#Populate the Locations table
-    $query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Byrne House")';
-   
-    $results = mysqli_query($dbc,$query);
-    check_results( $results );
+  $query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Byrne House")';
+ 
+  $results = mysqli_query($dbc,$query);
+  check_results( $results );
 
-    $query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "James A. Cannavino Library")';
+  $query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "James A. Cannavino Library")';
     
 	$results = mysqli_query($dbc,$query);
     check_results( $results );
@@ -245,7 +246,7 @@ function populate_db($dbc) {
 	$results = mysqli_query($dbc,$query);
     check_results( $results );
 	
-	#Populate the stuff table
+	#Populate the Stuff table
     $query = 'INSERT INTO stuff(location_id, description, create_date, update_date, room, owner, finder, item_status)  VALUES (18, "Red Marist Crew backpack", "2012-12-04 12:43:32", "2012-12-10 15:24:16", "Downstairs", "Jack Daniels", "John Doe", "claimed")';
 	
 	$results = mysqli_query($dbc,$query);
@@ -506,6 +507,7 @@ function show_full_record($dbc, $id) {
   }
 }
 
+# Displays the admins through a table.
 function show_admins($dbc) {
   $stringRegDate = 'DATE_FORMAT(reg_date, \'%b. %D%, %Y at %r\') as regDate';
   

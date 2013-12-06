@@ -47,6 +47,7 @@
       # Connects to a helpers file that sets up the table
       require( 'includes/helpers.php' );
       
+      # Queries, based on the keyword inputted in the search bar
       if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         if (isset($_GET['item'])) {
           $item = $_GET['item'];

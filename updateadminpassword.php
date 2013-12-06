@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<title>Limbo - Change Admin Password </title>
@@ -38,6 +39,7 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
         
+        # Validation, checks for empty fields
         if (!valid_name($username) || !valid_name($password)) {
           echo '<p style="color:red; font-size: 16px;">Please enter a valid username and password.</p>';
         }

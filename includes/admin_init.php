@@ -7,10 +7,11 @@ Who	Date		Comment
 RC	 3-Oct-13	Created.
 RC	30-Oct-13	Added show_record and show_link_records.
 WY  14-Nov-13 Modified for Limbo. Added a link in item's description.
+WY   6-Dec-13 Added Claim and Delete links in the table.
 */
 
 # Set this flag to false to disable debug diagnostics.
-$debug = true;
+$debug = false;
 
 # Shows the records in stuff
 function show_init_records($dbc) {

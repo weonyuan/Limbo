@@ -1,4 +1,3 @@
-
 <?php
 /*
 This file contains PHP helper functions.
@@ -8,10 +7,11 @@ Who	Date		Comment
 RC	 3-Oct-13	Created.
 RC	30-Oct-13	Added show_record and show_link_records.
 WY  14-Nov-13 Modified for Limbo. Added a link in item's description.
+WY   6-Dec-13 Created a delete confirmation and delete_admin function.
 */
 
 # Set this flag to false to disable debug diagnostics.
-$debug = true;
+$debug = false;
 
 # Shows the record before confirming deletion.
 function confirm_delete($dbc, $id) {
@@ -97,12 +97,14 @@ function confirm_delete($dbc, $id) {
   }
 }
 
+# Deletes an item based on the ID.
 function delete_record($dbc, $id) {
   $query = 'DELETE from stuff WHERE id = ' . $id;
 
   $results = mysqli_query($dbc,$query);
 }
 
+# Deletes an admin based on the username and ID.
 function delete_admin($dbc, $username, $id) {
   # Create a query to insert an admin using the parameters above.
 	$query  = 'DELETE FROM users ';

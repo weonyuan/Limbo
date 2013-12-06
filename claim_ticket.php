@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Limbo - Delete Ticket </title>
+		<title>Limbo - Claim Ticket</title>
 	</head>
 	
 	<body>
@@ -17,11 +17,11 @@
       <p>
         <a href="limbo.php">Home</a> > 
         <a href="admin.php">Admin Login</a> > 
-        <a href="admin-1.php">Admin Options</a> > Delete ticket
+        <a href="admin-1.php">Admin Options</a> > Claim ticket
       </p>
     </div>
     
-    <h1>Delete Ticket</h1>
+    <h1>Claim Ticket</h1>
     
     <?php
       #connect to limbo_db
@@ -29,13 +29,13 @@
     ?>
 	
     <!-- Form for deletion of item -->
-    <form action="delete.php" name="delete_ticket_form">
+    <form action="claim_process.php" name="claim_ticket_form">
       
-      <p>Please enter the item's ID you wish to delete.</p>
+      <p>Please enter the item's ID you wish to claim.</p>
       <p>
         ID:
         <input name="id" type="int" size="5" />
-        <input type="submit" value="Delete" />
+        <input type="submit" value="Claim" />
       </p>
       
     </form>

@@ -4,6 +4,8 @@
   require('/includes/helpers.php');
   require('/includes/update_tools.php');
   
+  # This will set the item's status to "Claimed", based
+  # on the ID it receives, before redirecting user.
   if ($_SERVER[ 'REQUEST_METHOD' ] == 'GET') {
     if (isset($_GET['id'])) {
       claim_item($dbc, $_GET['id']);

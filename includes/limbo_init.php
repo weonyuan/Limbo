@@ -10,7 +10,7 @@ WY  14-Nov-13 Modified for Limbo. Added a link in item's description.
 */
 
 # Set this flag to false to disable debug diagnostics.
-$debug = true;
+$debug = false;
 
 # Shows the records in stuff
 function show_init_records($dbc) {

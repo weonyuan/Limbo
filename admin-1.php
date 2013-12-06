@@ -46,6 +46,7 @@
       require('/includes/admin_init.php');
       require('/includes/delete_tools.php');
       
+      # This displays the appropriate message, based from the action executed
       if (isset($_GET['deletedadmin'])) {
         echo '<P STYLE=color:red;>Admin has been successfully deleted.</P>';
       }
@@ -65,6 +66,7 @@
         echo '<P STYLE=color:red;>Item has been successfully added.</P>';
       }
       
+      # Queries on stuffs, filtered by date
       if(isset($_GET['lastReported'])) {
         $reportedDate = $_GET['lastReported'];
         show_filtered_records($dbc, $reportedDate);
@@ -85,7 +87,9 @@
           Ticket(s) |
           <a href="add_ticket.php">Add Ticket</a>&nbsp;
           <a href="update_ticket.php">Update Ticket</a>&nbsp;
+          <a href="claim_ticket.php">Claim Ticket</a>&nbsp;
           <a href="delete_ticket.php">Delete Ticket</a>
+          
         </div>
         <div>
           Admin(s) |
