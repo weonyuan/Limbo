@@ -52,7 +52,7 @@ function show_init_records($dbc) {
         echo '<TD ALIGN=left>' . ucfirst($row['item_status']) . '</TD>';
         echo '<TD ALIGN=left>' . $alinkDesc . '</TD>' ;
         echo '<TD ALIGN=left><A HREF=delete.php?id=' . $row['id'] . '>Delete</A> &nbsp;';
-        echo '<A HREF=claim_process.php?id=' . $row['id'] . '>Claimed</A>';
+        echo '<A HREF=claim_process.php?id=' . $row['id'] . '>Claim</A>';
         echo '</TD>'; 
         echo '</TR>' ;
       }
