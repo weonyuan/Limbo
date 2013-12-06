@@ -17,7 +17,7 @@
       <a href="admin.php">Admins</a>
     </div>
     
-	<!-- Breadcrumbing -->
+    <!-- Breadcrumbing -->
     <p>
       <a href="limbo.php">Home</a> > 
       <a href="admin.php">Admin Login</a> > Admin Options
@@ -46,11 +46,26 @@
       require('/includes/admin_init.php');
       require('/includes/delete_tools.php');
       
-      if (isset($_GET['deleted']) == "true") {
-        echo '<P STYLE=color:red;>Item has been successfully deleted.</P>';
-        show_init_records($dbc);
+      if (isset($_GET['deletedadmin'])) {
+        echo '<P STYLE=color:red;>Admin has been successfully deleted.</P>';
       }
-      else if(isset($_GET['lastReported'])) {
+      else if (isset($_GET['deleted'])) {
+        echo '<P STYLE=color:red;>Item has been successfully deleted.</P>';
+      }
+      else if (isset($_GET['updatedadmin'])) {
+        echo '<P STYLE=color:red;>Admin has been successfully updated.</P>';
+      }
+      else if (isset($_GET['updated'])) {
+        echo '<P STYLE=color:red;>Item has been successfully updated.</P>';
+      }
+      else if (isset($_GET['addedadmin'])) {
+        echo '<P STYLE=color:red;>Admin has been successfully added.</P>';
+      }
+      else if (isset($_GET['added'])) {
+        echo '<P STYLE=color:red;>Item has been successfully added.</P>';
+      }
+      
+      if(isset($_GET['lastReported'])) {
         $reportedDate = $_GET['lastReported'];
         show_filtered_records($dbc, $reportedDate);
       }
@@ -65,17 +80,18 @@
 	<!-- Bottom of the Page Navigation Bar -->
     <p>
       <div>
+        <strong>Options:</strong>
         <div>
-          Ticket Action(s) |
-          <a href="addticket.php">Add Ticket</a>
-          <a href="form_update.php">Update Ticket</a>
+          Ticket(s) |
+          <a href="add_ticket.php">Add Ticket</a>&nbsp;
+          <a href="update_ticket.php">Update Ticket</a>&nbsp;
           <a href="delete_ticket.php">Delete Ticket</a>
         </div>
         <div>
-          Admin Action(s) |
-          <a href="addadminform.php">Add New Admin</a>
-          <a href="updateadminusername.php">Change Username</a>
-          <a href="updateadminpassword.php">Change Password</a>
+          Admin(s) |
+          <a href="addadminform.php">Add New Admin</a>&nbsp;
+          <a href="updateadminusername.php">Change Username</a>&nbsp;
+          <a href="updateadminpassword.php">Change Password</a>&nbsp;
           <a href="deleteadmin.php">Delete Admin</a>
         </div>
       </div>

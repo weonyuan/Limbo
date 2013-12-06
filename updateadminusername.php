@@ -1,6 +1,12 @@
 <html>
 	<head>
 		<title>Limbo - Change Admin Username </title>
+    
+    <style>
+      td, th {
+        padding: 5px;
+      }
+    </style>
 	</head>
 	
   <body>
@@ -18,30 +24,54 @@
       </p>
     </div>
     
-    <h1>Limbo - Change Admin Username</h1>
+    <h1>Change Admin Username</h1>
     
     <?php
       #connect to limbo_db
       require( '/includes/connect_limbo_db.php' ) ;
-    ?>
-	
-    <!-- Form for updating an item -->
-    <form action="username_update_process.php" method="get" name="username_update_form">
-    
-      <p>
-        ID:
-        <input name="id" type="int" />
-      </p>
-	  
-	  <p>
-        New Username:
-        <input name="username" type="text" />
-      </p>
+      require( '/includes/helpers.php' ) ;
+      require( '/includes/update_tools.php' ) ;
       
-      <p>
-        Password:
-        <input name="password" type="password" />
-      </p>
+      show_admins($dbc);
+      
+      if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
+        $id = $_POST['id'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        
+        if (!valid_number($id)) {
+          echo '<p style="color:red; font-size: 16px;">Please enter the valid ID.</p>';
+        }
+        else if (!valid_name($username) || !valid_name($password)) {
+          echo '<p style="color:red; font-size: 16px;">Please enter the valid username and password.</p>';
+        }
+        else {
+          update_username($dbc, $id, $username, $password);
+          load('admin-1.php?updatedadmin=true');
+        }
+      }
+      
+      mysqli_close($dbc);
+    ?>
+    
+    <p>Please enter the user's ID, the new username, and the user's password to change the username.</p>
+    
+    <!-- Form for updating an item -->
+    <form action="updateadminusername.php" method="POST" name="username_update_form">
+      <table>
+        <tr>
+          <td>ID:</td>
+          <td><input name="id" type="text" /></td>
+        </tr>
+        <tr>
+          <td>New Username:</td>
+          <td><input name="username" type="text" /></td>
+        </tr>
+        <tr>
+          <td>Password:</td>
+          <td><input name="password" type="password" /></td>
+        </tr>
+      </table>
     
       <!-- Submit and reset buttons -->
       <input type="submit" name="submit" id="submit" value="Submit" />

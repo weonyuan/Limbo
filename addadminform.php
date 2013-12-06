@@ -26,19 +26,40 @@
     <?php
       #connect to limbo_db
       require( '/includes/connect_limbo_db.php' ) ;
+      require( '/includes/helpers.php' ) ;
+      require( '/includes/add_tools.php' ) ;
+      
+      if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        
+        if (!valid_name($username)) {
+          echo '<p style="color:red; font-size: 16px;">Please enter a valid username!</p>';
+        }
+        else if (!valid_name($password)) {
+          echo '<p style="color:red; font-size: 16px;">Please enter a password!</p>';
+        }
+        else {
+          insert_admin($dbc, $username, $password);
+          load('admin-1.php?addedadmin=true');
+        }
+      }
     ?>
-
+    
+    <p>Please enter an username and password for the new admin.</p>
+    
     <!-- Creates form to add new item to limbo_db -->
-    <form action="addadminprocess.php" method="POST" name="add_admin_form">
-      <p>
-        Username:
-        <input name="username" type="text" />
-      </p>
-	  
-	  <p>
-        Password:
-        <input name="password" type="password" />
-      </p>
+    <form action="addadminform.php" method="POST" name="add_admin_form">
+      <table>
+        <tr>
+          <td>Username:</td>
+          <td><input name="username" type="text" /></td>
+        </tr>
+        <tr>
+          <td>Password:</td>
+          <td><input name="password" type="password" /></td>
+        </tr>
+      </table>
 	  
       <!-- Submit and Reset button -->
       <input type="submit" name="submit" id="submit" value="Submit" />

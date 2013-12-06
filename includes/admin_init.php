@@ -1,4 +1,3 @@
-
 <?php
 /*
 This file contains PHP helper functions.
@@ -36,8 +35,8 @@ function show_init_records($dbc) {
       echo '<TH>ID</TH>';
       echo '<TH>Date/Time</TH>';
       echo '<TH>Item Status</TH>';
-      echo '<TH>Stuff</TH>';
-      echo '<TH>Action(s)</TH';
+      echo '<TH>Description</TH>';
+      echo '<TH>Action(s)</TH>';
       echo '</TR>';
 
       # For each row result, generate a table row
@@ -51,7 +50,9 @@ function show_init_records($dbc) {
         echo '<TD ALIGN=left>' . $row['date'] . '</TD>' ;
         echo '<TD ALIGN=left>' . ucfirst($row['item_status']) . '</TD>';
         echo '<TD ALIGN=left>' . $alinkDesc . '</TD>' ;
-        echo '<TD ALIGN=left><A HREF=delete.php?id=' . $row['id'] . '>Delete</A>' . '</TD>'; 
+        echo '<TD ALIGN=left><A HREF=delete.php?id=' . $row['id'] . '>Delete</A> &nbsp;';
+        echo '<A HREF=claim_process.php?id=' . $row['id'] . '>Claimed</A>';
+        echo '</TD>'; 
         echo '</TR>' ;
       }
 
@@ -99,6 +100,7 @@ function show_filtered_records($dbc, $reportedDate) {
       echo '<TH>Update Date</TH>';
       echo '<TH>Item Status</TH>';
       echo '<TH>Description</TH>';
+      echo '<TH>Action(s)</TH>';
       echo '</TR>';
 
       # For each row result, generate a table row
@@ -112,6 +114,9 @@ function show_filtered_records($dbc, $reportedDate) {
         echo '<TD ALIGN=left>' . $row['date'] . '</TD>' ;
         echo '<TD ALIGN=left>' . ucfirst($row['item_status']) . '</TD>';
         echo '<TD ALIGN=left>' . $alinkDesc . '</TD>' ;
+        echo '<TD ALIGN=left><A HREF=delete.php?id=' . $row['id'] . '>Delete</A> &nbsp;';
+        echo '<A HREF=claim_process.php?id=' . $row['id'] . '>Claimed</A>';
+        echo '</TD>'; 
         echo '</TR>' ;
       }
 

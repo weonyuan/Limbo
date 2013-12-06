@@ -1,6 +1,12 @@
 <html>
 	<head>
 		<title>Limbo - Change Admin Password </title>
+    
+    <style>
+      td, th {
+        padding: 5px;
+      }
+    </style>
 	</head>
 	
   <body>
@@ -18,26 +24,47 @@
       </p>
     </div>
     
-    <h1>Limbo - Change Admin Password</h1>
+    <h1>Change Admin Password</h1>
     
     <?php
       #connect to limbo_db
       require( '/includes/connect_limbo_db.php' ) ;
-    ?>
-	
-    <!-- Form for updating an item -->
-    <form action="password_update_process.php" method="get" name="password_update_form">
-    
-      <p>
-        Username:
-        <input name="username" type="text" />
-      </p>
+      require( '/includes/helpers.php' ) ;
+      require( '/includes/update_tools.php' ) ;
       
-      <p>
-        New Password:
-        <input name="password" type="password" />
-      </p>
+      show_admins($dbc);
+      
+      if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        
+        if (!valid_name($username) || !valid_name($password)) {
+          echo '<p style="color:red; font-size: 16px;">Please enter a valid username and password.</p>';
+        }
+        else {
+          update_password($dbc, $username, $password);
+          load('admin-1.php?updatedadmin=true');
+        }
+      }
+      
+      mysqli_close($dbc);
+    ?>
     
+    <p>Please enter the username and password, in order to change the admin's password.</p>
+    
+    <!-- Form for updating an item -->
+    <form action="updateadminpassword.php" method="POST" name="password_update_form">
+      <table>
+        <tr>
+          <td>Username:</td>
+          <td><input name="username" type="text" /></td>
+        </tr>
+        <tr>
+          <td>Password:</td>
+          <td><input name="password" type="password" /></td>
+        </tr>
+      </table>
+      
       <!-- Submit and reset buttons -->
       <input type="submit" name="submit" id="submit" value="Submit" />
       <input type="reset" name="reset" id="reset" value="Reset" />

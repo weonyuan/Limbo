@@ -1,6 +1,12 @@
 <html>
 	<head>
-		<title>Limbo - Delete Admin </title>
+		<title>Limbo - Delete Admin</title>
+    
+    <style>
+      td, th {
+        padding: 5px;
+      }
+    </style>
 	</head>
 	
   <body>
@@ -18,29 +24,49 @@
       </p>
     </div>
     
-    <h1>Limbo - Delete Admin</h1>
+    <h1>Delete Admin</h1>
     
     <?php
       #connect to limbo_db
       require( '/includes/connect_limbo_db.php' ) ;
-    ?>
-	
-    <!-- Form for updating an item -->
-    <form action="delete_admin_process.php" method="get" name="delete_admin_form">
-    
-      <p>
-        Username:
-        <input name="username" type="text" />
-      </p>
+      require( '/includes/helpers.php' ) ;
+      require( '/includes/delete_tools.php' ) ;
       
-      <p>
-        Password:
-        <input name="password" type="password" />
-      </p>
+      show_admins($dbc);
+      
+      if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
+        $username = $_POST['username'];
+        $id = $_POST['id'];
+        
+        if (!valid_name($username) || !valid_number($id)) {
+          echo '<p style="color:red; font-size: 16px;">Please enter a valid username and ID.</p>';
+        }
+        else {
+          delete_admin($dbc, $username, $id);
+          load('admin-1.php?deletedadmin=true');
+        }
+      }
+      
+      mysqli_close($dbc);
+    ?>
     
-      <!-- Submit and reset buttons -->
+    <p>Please enter the admin's username and ID you wish to delete.</p>
+    
+    <form action="deleteadmin.php" method="POST" name="add_admin_form">
+      <table>
+        <tr>
+          <td>ID:</td>
+          <td><input name="id" type="text" /></td>
+        </tr>
+        <tr>
+          <td>Username:</td>
+          <td><input name="username" type="text" /></td>
+        </tr>
+      </table>
+	  
+      <!-- Submit and Reset button -->
       <input type="submit" name="submit" id="submit" value="Submit" />
       <input type="reset" name="reset" id="reset" value="Reset" />
-    </form>
+    </form>  
 	</body>
 </html>

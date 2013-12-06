@@ -16,14 +16,14 @@ $debug = true;
 # Shows the record before confirming deletion.
 function confirm_delete($dbc, $id) {
   # Create a query to get the id, date, status, and description by date descending.
-  $stringCreateDate = 'DATE_FORMAT(s.create_date, \'%b. %D%, %Y at %r\') as createDate, ' ;
-  $stringUpdateDate = 'DATE_FORMAT(s.update_date, \'%b. %D%, %Y at %r\') as updateDate' ;
-	$query = 'SELECT s.id, ' . $stringCreateDate . $stringUpdateDate . ', s.item_status, l.name, s.room, s.description ' .
+  $stringCreateDate = 'DATE_FORMAT(s.create_date, \'%b. %D%, %Y at %r\') as createDate, ';
+  $stringUpdateDate = 'DATE_FORMAT(s.update_date, \'%b. %D%, %Y at %r\') as updateDate';
+	$query = 'SELECT s.id, ' . $stringCreateDate . $stringUpdateDate . ', s.item_status, l.name, s.room, s.owner, s.finder, s.description ' .
            'FROM stuff s, locations l ' .
            'WHERE s.id = ' . $id . ' AND s.location_id = l.id';
 
 	# Execute the query
-	$results = mysqli_query( $dbc , $query ) ;
+	$results = mysqli_query( $dbc , $query );
 
   # Show results
   if( $results ) {
@@ -59,6 +59,16 @@ function confirm_delete($dbc, $id) {
       echo '</TR>';
       
       echo '<TR>';
+      echo '<TH ALIGN=center>Owner</TH>';
+      echo '<TD ALIGN=left>' . $row['owner'] . '</TD>';
+      echo '</TR>';
+      
+      echo '<TR>';
+      echo '<TH ALIGN=center>Finder</TH>';
+      echo '<TD ALIGN=left>' . $row['finder'] . '</TD>';
+      echo '</TR>';
+      
+      echo '<TR>';
       echo '<TH ALIGN=center>Description</TH>';
       echo '<TD ALIGN=left>' . ucfirst($row['description']) . '</TD>';
       echo '</TR>';
@@ -77,7 +87,7 @@ function confirm_delete($dbc, $id) {
     echo '</FORM>';
     
     # Free up the results in memory
-    mysqli_free_result( $results ) ;
+    mysqli_free_result( $results );
   }
   else {
     echo '<P>Invalid item ID.</P>';
@@ -90,23 +100,16 @@ function confirm_delete($dbc, $id) {
 function delete_record($dbc, $id) {
   $query = 'DELETE from stuff WHERE id = ' . $id;
 
-  $results = mysqli_query($dbc,$query) ;
+  $results = mysqli_query($dbc,$query);
 }
 
-# Loads a specified or default URL.
-function load( $page = 'delete.php' ) {
-  # Begin URL with protocol, domain, and current directory.
-  $url = 'http://' . $_SERVER[ 'HTTP_HOST' ] . dirname( $_SERVER[ 'PHP_SELF' ] ) ;
+function delete_admin($dbc, $username, $id) {
+  # Create a query to insert an admin using the parameters above.
+	$query  = 'DELETE FROM users ';
+  $query .= 'WHERE username = \'' . $username . '\' ';
+  $query .= 'AND id = ' . $id;
 
-  # Remove trailing slashes then append page name to URL.
-  $url = rtrim( $url, '/\\' ) ;
-  $url .= '/' . $page;
-
-  # Execute redirect then quit.
-  session_start( );
-
-  header( "Location: $url" ) ;
-
-  exit() ;
+	# Execute the query
+	$results = mysqli_query($dbc, $query);
 }
 ?>

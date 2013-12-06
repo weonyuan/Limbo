@@ -42,7 +42,7 @@ function populate_db($dbc) {
     $query  = 'CREATE TABLE IF NOT EXISTS stuff (';
     $query .= '  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, ';
     $query .= '  location_id VARCHAR(60) NOT NULL,';
-    $query .= '  description VARCHAR(40) NOT NULL,';
+    $query .= '  description VARCHAR(60) NOT NULL,';
     $query .= '  create_date DATETIME    NOT NULL,';
     $query .= '  update_date DATETIME    NOT NULL,';
     $query .= '  room        TEXT,';
@@ -130,7 +130,7 @@ function populate_db($dbc) {
 	$results = mysqli_query($dbc,$query);
     check_results( $results );
 	
-	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Fonataine Hall")';
+	$query = 'INSERT INTO locations(create_date, update_date, name) VALUES (Now(), Now(), "Fontaine Hall")';
 	
 	$results = mysqli_query($dbc,$query);
     check_results( $results );	
@@ -246,12 +246,12 @@ function populate_db($dbc) {
     check_results( $results );
 	
 	#Populate the stuff table
-    $query = 'INSERT INTO stuff(location_id, description, create_date, update_date, room, owner, finder, item_status)  VALUES (18, "Red Marist Crew backpack", "2012-12-04 12:43:32", "2012-12-10 15:24:16", "Downstairs", "Jack Daniels", "John Doe", "lost")';
+    $query = 'INSERT INTO stuff(location_id, description, create_date, update_date, room, owner, finder, item_status)  VALUES (18, "Red Marist Crew backpack", "2012-12-04 12:43:32", "2012-12-10 15:24:16", "Downstairs", "Jack Daniels", "John Doe", "claimed")';
 	
 	$results = mysqli_query($dbc,$query);
     check_results( $results );
 	
-	$query = 'INSERT INTO stuff(location_id, description, create_date, update_date, room, owner, finder, item_status)  VALUES (31, "4th Generation Silver iPad", "2013-09-12 09:23:12", "2013-11-03 14:54:34", "2020", "", "Joe Smith", "lost")';
+	$query = 'INSERT INTO stuff(location_id, description, create_date, update_date, room, owner, finder, item_status)  VALUES (32, "4th Generation Silver iPad", "2013-09-12 09:23:12", "2013-11-03 14:54:34", "2020", "Joe Smith", "", "lost")';
 	
 	$results = mysqli_query($dbc,$query);
     check_results( $results );
@@ -283,7 +283,7 @@ function connect_db ($dbname) {
     $dbc = @mysqli_connect ( 'localhost', 'root', '', $dbname );
 
     if($dbc) {
-        mysqli_set_charset( $dbc, 'utf8' ) ;
+        mysqli_set_charset( $dbc, 'utf8' );
         return $dbc;
     }
 
@@ -301,10 +301,10 @@ function connect_db ($dbname) {
 
     # Connect to the (newly created) database
     $dbc = @mysqli_connect ( 'localhost', 'root', '', $dbname )
-        OR die ( mysqli_connect_error() ) ;
+        OR die ( mysqli_connect_error() );
 
     # Set encoding to match PHP script encoding.
-    mysqli_set_charset( $dbc, 'utf8' ) ;
+    mysqli_set_charset( $dbc, 'utf8' );
 
     return $dbc;
 }
@@ -312,7 +312,7 @@ function connect_db ($dbname) {
 # Shows the records in stuff
 function show_link_records($dbc, $item, $reportedDate, $status) {
   $item = ' \'%' . $item . '%\' ';
-  $stringDate = 'DATE_FORMAT(update_date, \'%b. %D%, %Y at %r\') as date' ;
+  $stringDate = 'DATE_FORMAT(update_date, \'%b. %D%, %Y at %r\') as date';
   $reportedDate = 'DATE_SUB(Now(), INTERVAL ' . $reportedDate . ' DAY) ';
   $status = '\'' . $status . '\'';
   
@@ -320,11 +320,11 @@ function show_link_records($dbc, $item, $reportedDate, $status) {
 	$query = 'SELECT id, ' . $stringDate . ', item_status, description FROM stuff ' .
            'WHERE description LIKE' . $item . 'AND item_status = ' . $status .
            'AND update_date BETWEEN ' . $reportedDate . 'AND Now() ' .
-           'ORDER BY update_date DESC' ;
+           'ORDER BY update_date DESC';
 
 	# Execute the query
-	$results = mysqli_query( $dbc , $query ) ;
-	check_results($results) ;
+	$results = mysqli_query( $dbc , $query );
+	check_results($results);
   
   # This will count the number of results in the table.
   $rowCount = mysqli_num_rows($results);
@@ -346,39 +346,39 @@ function show_link_records($dbc, $item, $reportedDate, $status) {
       # For each row result, generate a table row
       while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) ) {
         $alink = '<A HREF=stuff.php?id=' . $row['id'] . '>' .
-                 $row['id'] . '</A>' ;
+                 $row['id'] . '</A>';
         $alinkDesc = '<A HREF=stuff.php?id=' . $row['id'] . '>' .
-                 ucfirst($row['description']) . '</A>' ;
-        echo '<TR>' ;
-        echo '<TD ALIGN=right>' . $alink . '</TD>' ;
-        echo '<TD ALIGN=left>' . $row['date'] . '</TD>' ;
+                 ucfirst($row['description']) . '</A>';
+        echo '<TR>';
+        echo '<TD ALIGN=right>' . $alink . '</TD>';
+        echo '<TD ALIGN=left>' . $row['date'] . '</TD>';
         echo '<TD ALIGN=left>' . ucfirst($row['item_status']) . '</TD>';
-        echo '<TD ALIGN=left>' . $alinkDesc . '</TD>' ;
-        echo '</TR>' ;
+        echo '<TD ALIGN=left>' . $alinkDesc . '</TD>';
+        echo '</TR>';
       }
 
       # End the table
       echo '</TABLE>';
 
       # Free up the results in memory
-      mysqli_free_result( $results ) ;
+      mysqli_free_result( $results );
     }
   }
   else {
-    echo '<P>No results found.</P>' ;
+    echo '<P>No results found.</P>';
   }
 }
 
 # Shows the selected record in quick link.
 function show_record($dbc, $id) {
   # Create a query to get the id, date, status, and description by date descending.
-  $stringDate = 'DATE_FORMAT(update_date, \'%b. %D%, %Y at %r\') as date' ;
+  $stringDate = 'DATE_FORMAT(update_date, \'%b. %D%, %Y at %r\') as date';
 	$query = 'SELECT id, ' . $stringDate . ', item_status, description FROM stuff ' .
            'WHERE id=' . $id;
 
 	# Execute the query
-	$results = mysqli_query( $dbc , $query ) ;
-	check_results($results) ;
+	$results = mysqli_query( $dbc , $query );
+	check_results($results);
   
   # This will count the number of results in the table.
   $rowCount = mysqli_num_rows($results);
@@ -425,22 +425,22 @@ function show_record($dbc, $id) {
          'Click here for full description</A></P>';
     
     # Free up the results in memory
-    mysqli_free_result( $results ) ;
+    mysqli_free_result( $results );
   }
 }
 
 # Shows the selected record in complete info.
 function show_full_record($dbc, $id) {
   # Create a query to get the id, date, status, and description by date descending.
-  $stringCreateDate = 'DATE_FORMAT(s.create_date, \'%b. %D%, %Y at %r\') as createDate, ' ;
-  $stringUpdateDate = 'DATE_FORMAT(s.update_date, \'%b. %D%, %Y at %r\') as updateDate' ;
-	$query = 'SELECT s.id, ' . $stringCreateDate . $stringUpdateDate . ', s.item_status, l.name, s.room, s.description ' .
+  $stringCreateDate = 'DATE_FORMAT(s.create_date, \'%b. %D%, %Y at %r\') as createDate, ';
+  $stringUpdateDate = 'DATE_FORMAT(s.update_date, \'%b. %D%, %Y at %r\') as updateDate';
+	$query = 'SELECT s.id, ' . $stringCreateDate . $stringUpdateDate . ', s.item_status, l.name, s.room, s.owner, s.finder, s.description ' .
            'FROM stuff s, locations l ' .
            'WHERE s.id = ' . $id . ' AND s.location_id = l.id';
 
 	# Execute the query
-	$results = mysqli_query( $dbc , $query ) ;
-	check_results($results) ;
+	$results = mysqli_query( $dbc , $query );
+	check_results($results);
 
   # Show results
   if( $results ) {
@@ -482,6 +482,16 @@ function show_full_record($dbc, $id) {
       echo '</TR>';
       
       echo '<TR>';
+      echo '<TH ALIGN=center>Owner</TH>';
+      echo '<TD ALIGN=left>' . $row['owner'] . '</TD>';
+      echo '</TR>';
+      
+      echo '<TR>';
+      echo '<TH ALIGN=center>Finder</TH>';
+      echo '<TD ALIGN=left>' . $row['finder'] . '</TD>';
+      echo '</TR>';
+      
+      echo '<TR>';
       echo '<TH ALIGN=center>Description</TH>';
       echo '<TD ALIGN=left>' . ucfirst($row['description']) . '</TD>';
       echo '</TR>';
@@ -492,7 +502,57 @@ function show_full_record($dbc, $id) {
     echo '<BR>';
 
     # Free up the results in memory
-    mysqli_free_result( $results ) ;
+    mysqli_free_result( $results );
+  }
+}
+
+function show_admins($dbc) {
+  $stringRegDate = 'DATE_FORMAT(reg_date, \'%b. %D%, %Y at %r\') as regDate';
+  
+  # Create a query to get the id, update date, item status, description sorted by update date
+  $query = 'SELECT id, ' . $stringRegDate . ', username ' .
+           'FROM users ORDER BY id DESC';
+  
+  # Execute the query
+  $results = mysqli_query( $dbc , $query );
+  
+  # This will count the number of results in the table.
+  $rowCount = mysqli_num_rows($results);
+  
+  if($rowCount > 0) {
+    # Show results
+    if( $results ) {
+      # But...wait until we know the query succeeded before
+      # starting the table.
+      echo '<TABLE border=\"2px solid black\">';
+      echo '<TR>';
+      echo '<TH>ID</TH>';
+      echo '<TH>Registered Date</TH>';
+      echo '<TH>Username</TH>';
+      echo '</TR>';
+
+      # For each row result, generate a table row
+      while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) ) {
+        echo '<TR>';
+        echo '<TD ALIGN=right>' . $row['id'] . '</TD>';
+        echo '<TD ALIGN=left>' . $row['regDate'] . '</TD>';
+        echo '<TD ALIGN=left>' . $row['username'] . '</TD>';
+        echo '</TR>';
+      }
+
+      # End the table
+      echo '</TABLE>';
+
+      # Free up the results in memory
+      mysqli_free_result( $results );
+    }
+    else {
+      # If we get here, something has gone wrong
+      echo '<p>' . mysqli_error( $dbc ) . '</p>' ;
+    }
+  }
+  else {
+    echo '<P>No results found.</P>';
   }
 }
 
@@ -502,8 +562,8 @@ function show_title($dbc, $id) {
 	$query = 'SELECT id, description FROM stuff WHERE id=' . $id;
 
 	# Execute the query
-	$results = mysqli_query( $dbc , $query ) ;
-	check_results($results) ;
+	$results = mysqli_query( $dbc , $query );
+	check_results($results);
 
   # Show results
   if( $results ) {
@@ -515,7 +575,29 @@ function show_title($dbc, $id) {
   }
   
   # Free up the results in memory
-  mysqli_free_result( $results ) ;
+  mysqli_free_result( $results );
+}
+
+# Validates the item's number
+function valid_number($number) {
+  if (empty($number) || !is_numeric($number)) {
+    return false;
+  } else {
+      $number = intval($number);
+      if ($number <= 0) {
+         return false;
+      }
+  }
+  return true;
+}
+
+# Validates the item's name
+function valid_name($name) {
+  if (empty($name)) {
+    return false;
+  } else {
+      return true;
+  }
 }
 
 # Shows the query as a debugging aid
@@ -523,7 +605,7 @@ function show_query($query) {
   global $debug;
 
   if($debug) {
-    echo "<p>Query = $query</p>" ;
+    echo "<p>Query = $query</p>";
   }
 }
 
@@ -532,7 +614,24 @@ function check_results($results) {
   global $dbc;
 
   if($results != true) {
-    echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>'  ;
+    echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>' ;
   }
+}
+
+# Loads a specified or default URL.
+function load( $page = 'admin-1.php' ) {
+  # Begin URL with protocol, domain, and current directory.
+  $url = 'http://' . $_SERVER[ 'HTTP_HOST' ] . dirname( $_SERVER[ 'PHP_SELF' ] );
+
+  # Remove trailing slashes then append page name to URL.
+  $url = rtrim( $url, '/\\' );
+  $url .= '/' . $page;
+
+  # Execute redirect then quit.
+  session_start( );
+
+  header( "Location: $url" );
+
+  exit();
 }
 ?>

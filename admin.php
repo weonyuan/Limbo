@@ -27,21 +27,19 @@ JE	15-Nov-13   Modified File for Admin Login.
     <?php
       # Connect to MySQL server and the database
       require( 'includes/connect_limbo_db.php' ) ;
-
-      # Connect to MySQL server and the database
       require( 'includes/admin_login_tools.php' ) ;
 
       if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
-
         $name = $_POST['username'] ;
+        
+        $pid = validate($name) ;
 
-          $pid = validate($name) ;
-
-          if($pid == -1)
-            echo '<P style=color:red>Login failed please try again.</P>' ;
-
-          else
-            load('admin-1.php', $pid);
+        if($pid == -1) {
+          echo '<P STYLE=color:red>Login failed please try again.</P>' ;
+        }
+        else {
+          load('admin-1.php', $pid);
+        }
       }
     ?>
     <!-- Get inputs from the user. -->

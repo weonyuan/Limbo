@@ -10,24 +10,6 @@ JE	15-Nov-13   Modified File for admin login of Limbo.
 # Includes these helper functions
 require( 'includes/helpers.php' ) ;
 
-# Loads a specified or default URL.
-function load( $page = 'admin.php', $pid = -1 )
-{
-  # Begin URL with protocol, domain, and current directory.
-  $url = 'http://' . $_SERVER[ 'HTTP_HOST' ] . dirname( $_SERVER[ 'PHP_SELF' ] ) ;
-
-  # Remove trailing slashes then append page name to URL.
-  $url = rtrim( $url, '/\\' ) ;
-  $url .= '/' . $page;
-
-  # Execute redirect then quit.
-  session_start( );
-
-  header( "Location: $url" ) ;
-
-  exit() ;
-}
-
 # Validates the username and password.
 # Returns -1 if validate fails, and >= 0 if it succeeds
 # which is the primary key id.
